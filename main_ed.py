@@ -19,7 +19,7 @@ if len(sys.argv) > 1:
     config_tuning_file = 'tuning_config (copy).json'
 
 print(config_tuning_file)
-exit()
+
 log_dir = './log/results/'
 
 def tuning_encoder_model(inputs):
