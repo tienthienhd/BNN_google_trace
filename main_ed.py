@@ -7,15 +7,20 @@ Created on Thu Aug 23 14:48:26 2018
 """
 #from multiprocessing import Pool
 import multiprocessing as mp
-import queue
 import os
 import pandas as pd
 from encoder_decoder import EncoderDecoder
 from config import Config
 from data import Data
+import sys
 
+config_tuning_file = 'tuning_config.json'
+if len(sys.argv) > 1:
+    config_tuning_file = 'tuning_config (copy).json'
+
+print(config_tuning_file)
+exit()
 log_dir = './log/results/'
-config_tuning_file = 'tuning_config (copy).json'
 
 def tuning_encoder_model(inputs):
     dataset = inputs[0]
@@ -122,6 +127,7 @@ def single_processing():
             tuning_encoder_model(tuning_config)
 
 def main():
+    
     num_processes = mp.cpu_count()
     pool = mp.Pool(num_processes)
     
