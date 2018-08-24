@@ -16,7 +16,7 @@ import sys
 
 config_tuning_file = 'tuning_config.json'
 if len(sys.argv) > 1:
-    config_tuning_file = 'tuning_config (copy).json'
+    config_tuning_file = 'test.json'
 
 print(config_tuning_file)
 
