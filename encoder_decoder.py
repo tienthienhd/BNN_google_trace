@@ -417,17 +417,17 @@ class EncoderDecoder(object):
                     (num_batches+1) * self.batch_size]
                     
                     
-                feed_input = {self.encoder_x: e_x,
+                input_feed = {self.encoder_x: e_x,
                                 self.decoder_x: d_x,
                                 self.decoder_y: d_y}
                 
-                feed_output = [self.pred_inverse, 
+                output_feed = [self.pred_inverse, 
                                self.y_inverse, 
                                self.MAE, 
                                self.RMSE, 
                                self.loss]
                     
-                outputs = sess.run(feed_output, feed_input)
+                outputs = sess.run(output_feed, input_feed)
                 
                 mae.append(outputs[2])
                 rmse.append(outputs[3])

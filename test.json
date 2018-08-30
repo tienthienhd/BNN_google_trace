@@ -14,7 +14,7 @@
         "features": [[["meanCPUUsage"], ["meanCPUUsage"]], 
                   [["canonical_memory_usage"], ["canonical_memory_usage"]], 
                   [["meanCPUUsage", "canonical_memory_usage"], ["meanCPUUsage"]],
-                  [["meanCPUUsage", "canonical_memory_usage"], ["meanCPUUsage"]]]
+                  [["meanCPUUsage", "canonical_memory_usage"], ["canonical_memory_usage"]]]
     },
     
     "encoder_decoder": {
