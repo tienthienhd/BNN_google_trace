@@ -13,6 +13,7 @@ from encoder_decoder import EncoderDecoder
 from config import Config
 from data import Data
 import sys
+import shutil
 
 config_tuning_file = 'tuning_config.json'
 if len(sys.argv) > 1:
@@ -21,6 +22,10 @@ if len(sys.argv) > 1:
 print(config_tuning_file)
 
 log_dir = './log/results/'
+
+if os.path.exists(log_dir):
+    shutil.rmtree(log_dir)
+    os.mkdir(log_dir)
 
 def tuning_encoder_model(inputs):
     dataset = inputs[0]
@@ -39,11 +44,9 @@ def tuning_encoder_model(inputs):
     val = dataset.get_data_encoder('val')
     test = dataset.get_data_encoder('test')
     
-    print('directory:{}  {}'.format(ed_dir, config_name))
-#    return config_name
-    
 #     fit encoder decoder model
     ed_model.fit(train, val, test, ed_dir, config_name, verbose=0)
+    print('directory:{}  {}'.format(ed_dir, config_name))
         
 
 def run(pool=None):
