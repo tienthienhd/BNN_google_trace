@@ -18,6 +18,8 @@ import shutil
 config_tuning_file = 'tuning_config.json'
 if len(sys.argv) > 1:
     config_tuning_file = 'test.json'
+    
+config_tuning_file = 'test.json'
 
 print(config_tuning_file)
 
@@ -25,6 +27,8 @@ log_dir = './log/results/'
 
 if os.path.exists(log_dir):
     shutil.rmtree(log_dir)
+    os.mkdir(log_dir)
+else:
     os.mkdir(log_dir)
 
 def tuning_encoder_model(inputs):
@@ -130,19 +134,18 @@ def single_processing():
             tuning_encoder_model(tuning_config)
 
 def main():
+    run()
     
-    num_processes = mp.cpu_count()
-    pool = mp.Pool(num_processes)
-    
-    
-    run(pool)
-    
-    
-    
-    pool.close()
-    pool.join()
-    pool.terminate()           
+#    if sys.argv[2] == 'multi':
+#        num_processes = mp.cpu_count()
+#        pool = mp.Pool(num_processes)
+#        run(pool)
+#        pool.close()
+#        pool.join()
+#        pool.terminate()           
+#    else:
+#        run()
     
             
-            
-main()
+if __name__ == '__main__':            
+    main()

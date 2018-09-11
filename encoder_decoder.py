@@ -162,7 +162,7 @@ class EncoderDecoder(object):
         
         self.batch_size = config['batch_size']
         self.num_epochs = config['num_epochs']
-        self.num_features = config['num_features']
+        self.num_features = len(config['features'][0])
         
         self.patience = config['patience']
         
@@ -292,7 +292,7 @@ class EncoderDecoder(object):
     def multi_step(self, sess, encoder_x, decoder_x, decoder_y, is_train=False):
         '''Feed through many batch size, each batch size corresponse step'''
         num_batches = 0
-        total_loss = 0.0
+        total_loss = np.float64(0.0)
         try:
             while True:
                 e_x = encoder_x[num_batches * self.batch_size : 
@@ -329,10 +329,11 @@ class EncoderDecoder(object):
         
         if folder_result and config_name:
             history_file = folder_result + config_name + '_history.png'
+            data_name = config_name[0: config_name.index('_', 5)]
 #            error_file = folder_result + config_name + '_error.csv'
 #            predict_file = folder_result + config_name + '_predict.csv'
 #            model_file = folder_result + config_name + '_model_encoder_decoder.ckpt'
-            mae_rmse_file = folder_result + 'mae_rmse_log.csv'
+            mae_rmse_file = folder_result + data_name + '_mae_rmse.csv'
         
 #        saver = tf.train.Saver()
         
@@ -356,7 +357,7 @@ class EncoderDecoder(object):
                     
                     # apply early stop
                     if early_stop(val_losses, self.patience):
-                        print('finished training at epoch', epoch)
+                        print('Finished training config {} at epoch {}'.format(config_name, epoch))
                         break
                 else:
                     if verbose == 1:
@@ -461,7 +462,7 @@ def test():
     from data import Data
     config = Config('config.json')
     data = Data(config.data)
-    
+    config.encoder_decoder['num_features'] = len(config.data['features'][0])
     # prepare data
     data.prepare_data_inputs_encoder(config.encoder_decoder['sliding_encoder'],
                                 config.encoder_decoder['sliding_decoder'])

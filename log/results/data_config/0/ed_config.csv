@@ -1,2 +1,0 @@
-activation,batch_size,input_keep_prob,layers_units,num_epochs,output_keep_prob,patience,rnn_unit_type,sliding_decoder,sliding_encoder,state_keep_prob,variational_recurrent
-tanh,32,1.0,"[64, 32]",100,1.0,20,gru,3,12,0.8,False

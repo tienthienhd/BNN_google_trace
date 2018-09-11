@@ -20,15 +20,15 @@
         "rnn_unit_type": ["lstm"],
         "input_keep_prob": [1.0],
         "output_keep_prob": [1.0],
-        "state_keep_prob": [1.0],
+        "state_keep_prob": [0.8],
         "variational_recurrent": [true],
         
-        "batch_size":[32],
-        "sliding_encoder": [12],
-        "sliding_decoder": [8],
+        "batch_size":[64],
+        "sliding_encoder": [6],
+        "sliding_decoder": [3],
         
-        "layers_units":[[16, 4]],
-        "num_epochs": [1000],
+        "layers_units":[[4]],
+        "num_epochs": [2],
         "patience": [20]
     },
     

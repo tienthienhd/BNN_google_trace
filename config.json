@@ -1,7 +1,7 @@
 {
     "data": {
         "data_directory": "./data/",
-        "data_name": "data_resource_usage_10Minutes_6176858948",
+        "data_name": "data_resource_usage_8Minutes_6176858948",
         "columns_full": ["time_stamp", "numberOfTaskIndex", "numberOfMachineId", 
              "meanCPUUsage", "canonical_memory_usage", "AssignMem",
              "unmapped_cache_usage", "page_cache_usage", "max_mem_usage",
@@ -14,19 +14,19 @@
     
     "encoder_decoder": {
         "activation": "tanh",
-        "rnn_unit_type": "lstm",
+        "rnn_unit_type": "gru",
         "input_keep_prob": 1.0,
         "output_keep_prob": 1.0,
         "state_keep_prob": 1.0,
-        "variational_recurrent": false,
+        "variational_recurrent": true,
         
     
         "batch_size": 32,
-        "sliding_encoder": 6,
+        "sliding_encoder": 12,
         "sliding_decoder": 3,
         
-        "layers_units": [16, 8],
-        "num_epochs": 200,
+        "layers_units": [64, 32],
+        "num_epochs": 1000,
         "patience": 20
         
     },
