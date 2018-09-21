@@ -44,9 +44,12 @@ def parse_string_to_array_list(string):
 def read_config(filename, chunksize=None, start_config=None):
     if chunksize:
         for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1)):
-            chunk[['layers_units']] = chunk[['layers_units']].apply(parse_string_to_array_int)
-            chunk[['columns_full']] = chunk[['columns_full']].apply(parse_string_to_array_string)
-            chunk[['features']] = chunk[['features']].apply(parse_string_to_array_list)
+            if 'layers_units' in chunk:
+                chunk[['layers_units']] = chunk[['layers_units']].apply(parse_string_to_array_int)
+            if 'columns_full' in chunk:
+                chunk[['columns_full']] = chunk[['columns_full']].apply(parse_string_to_array_string)
+            if 'features' in chunk:
+                chunk[['features']] = chunk[['features']].apply(parse_string_to_array_list)
             yield chunk
     else:
         return pd.read_csv(filename)
@@ -68,8 +71,8 @@ def generate_config(json_file, config_dir):
     
     
         
-#generate_config('tuning_config.json', './log/')
-#a = read_config('./log/configs.csv', 10000, 400000)
+#generate_config('test.json', './log/')
+#a = read_config('./log/results_2018-09-16/configs.csv', 10000, 0)
 #for i in a:
 #    print(i)
               

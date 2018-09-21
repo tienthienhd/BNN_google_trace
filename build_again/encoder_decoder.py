@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug 22 16:15:24 2018
+Created on Sun Sep 16 19:24:55 2018
 
 @author: tienthien
 """
@@ -9,12 +9,8 @@ Created on Wed Aug 22 16:15:24 2018
 import tensorflow as tf
 import numpy as np
 import pandas as pd
-
-#import matplotlib
-#matplotlib.use('Agg')
-
 import matplotlib.pyplot as plt
-
+import utils
 
 
 def rnn_cell(rnn_unit,
@@ -78,19 +74,10 @@ def rnn_cell(rnn_unit,
         cells.append(cell)
     return tf.nn.rnn_cell.MultiRNNCell(cells)
         
-def plot_loss(train_losses, val_losses=None, file_save=None):
-    epochs = range(len(train_losses))
-    plt.plot(epochs, train_losses, label='train loss')
-    if val_losses:
-        plt.plot(epochs, val_losses, label='validation loss')
-    plt.xlabel('epoch')
-    plt.ylabel('loss')
-    plt.legend()
-    plt.savefig(file_save)
-#    plt.show()
-    plt.clf()
+
     
-        
+
+    
 
 def get_state_variables(rnn_unit_type, batch_size, cell):
     # For each layer, get the initial state and make a variable out of it
@@ -127,25 +114,11 @@ def get_state_update_op(rnn_unit_type, state_variables, new_states):
 
 
 
-def early_stop(array, patience=0, min_delta=0.0):
-    if len(array) <= patience :
-        return False
+
     
-    value = array[len(array) - patience - 1]
-    arr = array[len(array)-patience:]
-    check = 0
-    for val in arr:
-        if(val - value > min_delta):
-            check += 1
-    if(check == patience):
-        return True
-    else:
-        return False
-
-
+    
 class EncoderDecoder(object):
-    
-    def __init__(self, config=None, max_min_data=None):
+    def __init__(self, config=None, sess=None, max_min_data=None):
         tf.reset_default_graph()
         
         self.rnn_unit = config['rnn_unit_type']
@@ -171,8 +144,16 @@ class EncoderDecoder(object):
             self.min = max_min_data[1]
         
         self.build_model()
-    
         
+        if sess:
+            self.sess = sess
+        else:
+            self.sess = tf.Session()
+            
+        self.sess.run(tf.global_variables_initializer())
+
+
+
     def build_model(self):
         '''Build model with hyperparameters got when create object model encoder
         decoder.
@@ -263,9 +244,11 @@ class EncoderDecoder(object):
                 self.loss = tf.reduce_mean(tf.squared_difference(pred_decoder, 
                                                             self.decoder_y))
                 self.optimizer  = tf.train.AdamOptimizer().minimize(self.loss)
-                
-    
-    def step(self, sess, encoder_x, decoder_x, decoder_y, is_train=False):
+        
+        self.saver = tf.train.Saver()
+
+
+    def step(self, encoder_x, decoder_x, decoder_y, is_train=False):
         '''Feed input each step. Inputs is encoder_x, decoder_x, decoder_y.
         if is_train is set True then model is trained to optimize loss.
         Output is loss'''
@@ -274,132 +257,115 @@ class EncoderDecoder(object):
                       self.decoder_y: decoder_y
                 }
         
-        
         output_feed = None
         if is_train:
             output_feed = [self.update_op, self.loss, self.optimizer]
         else:
             output_feed = [self.loss]
             
-        outputs = sess.run(output_feed, input_feed)
+        outputs = self.sess.run(output_feed, input_feed)
         
         if is_train:
             return outputs[1]
         else:
             return outputs[0]
-    
-    
-    def multi_step(self, sess, encoder_x, decoder_x, decoder_y, is_train=False):
-        '''Feed through many batch size, each batch size corresponse step'''
-        num_batches = 0
-        total_loss = np.float64(0.0)
-        try:
-            while True:
-                e_x = encoder_x[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                d_x = decoder_x[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                d_y = decoder_y[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                    
-                _loss = self.step(sess, e_x, d_x, d_y, is_train)
-                
-                total_loss += _loss
-                num_batches += 1
-        except tf.errors.InvalidArgumentError:
-            ''' if exception appear then this is last batch . The last batch not
-            enough examples to feed through graph because state of encoder is
-            fixed'''
-            pass
         
+    def multi_step(self, encoder_x, decoder_x, decoder_y, is_train=False):
+        '''Feed through many batch size, each batch size corresponse step'''
+        encoder_x = utils.padding(encoder_x, self.batch_size)
+        decoder_x = utils.padding(decoder_x, self.batch_size)
+        decoder_y = utils.padding(decoder_y, self.batch_size)
+        
+        num_batches = int(len(encoder_x)/self.batch_size)
+        if len(encoder_x) % self.batch_size != 0:
+            num_batches += 1
+        total_loss = 0.0
+        
+        for batch in range(num_batches):
+            e_x = encoder_x[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
+            d_x = decoder_x[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
+            d_y = decoder_y[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
+                
+            _loss = self.step(e_x, d_x, d_y, is_train)
+            total_loss += _loss
         avg_loss = total_loss / num_batches
         
         return avg_loss
-            
-            
-            
+        
+                
+                
+#        num_batches = 0
+#        total_loss = 0.0
+#        
+#        try:
+#            while True:
+#                e_x = encoder_x[num_batches * self.batch_size : 
+#                    (num_batches+1) * self.batch_size]
+#                d_x = decoder_x[num_batches * self.batch_size : 
+#                    (num_batches+1) * self.batch_size]
+#                d_y = decoder_y[num_batches * self.batch_size : 
+#                    (num_batches+1) * self.batch_size]
+#                    
+#                _loss = self.step(e_x, d_x, d_y, is_train)
+#                
+#                total_loss += _loss
+#                num_batches += 1
+#        except tf.errors.InvalidArgumentError:
+#            ''' if exception appear then this is last batch . The last batch not
+#            enough examples to feed through graph because state of encoder is
+#            fixed'''
+#            pass
+#        
+#        avg_loss = total_loss / num_batches
+#        
+#        return avg_loss
     
-    def fit(self, train, val=None, test=None, folder_result=None, 
-            config_name=None, verbose=1):
-        history_file = None
-        error_file = None
-        predict_file = None
-        model_file = None
-        mae_rmse_file = None
+    def train(self, train_set, val_set=None, show_step=10):
+        train_encoder_x = train_set[0]
+        train_decoder_x = train_set[1]
+        train_decoder_y = train_set[2]
         
-        if folder_result and config_name:
-            history_file = folder_result + config_name + '_history.png'
-            data_name = config_name[0: config_name.index('_', 5)]
-#            error_file = folder_result + config_name + '_error.csv'
-#            predict_file = folder_result + config_name + '_predict.csv'
-            model_file = folder_result + config_name + '_model_encoder_decoder.ckpt'
-            mae_rmse_file = folder_result + data_name + '_mae_rmse.csv'
-        
-        saver = tf.train.Saver()
-        
-        with tf.Session() as sess:
-            sess.run(tf.global_variables_initializer())
+        val_encoder_x = None
+        val_decoder_x = None
+        val_decoder_y = None
+        if val_set:
+            val_encoder_x = train_set[0]
+            val_decoder_x = train_set[1]
+            val_decoder_y = train_set[2]
             
-            train_losses = []
-            val_losses = []
-#            print(self.num_epochs)
-            for epoch in range(self.num_epochs):
-                loss_train = self.train(sess, train)
-                train_losses.append(loss_train)
+        train_losses = []
+        val_losses = []
+        
+        for epoch in range(self.num_epochs):
+            train_loss = self.multi_step(train_encoder_x, train_decoder_x, 
+                                         train_decoder_y, True)
+            train_losses.append(train_loss)
+            
+            if val_set:
+                val_loss = self.multi_step(val_encoder_x, val_decoder_x, 
+                                           val_decoder_y, False)
+                val_losses.append(val_loss)
                 
-                if val:
-                    loss_val = self.validate(sess, val)
-                    val_losses.append(loss_val)
+                if show_step is not 0 and epoch % show_step == 0:
+                    print('Epoch #%d loss train = %.7f  loss_val = %.7f' % (epoch,
+                              train_loss, val_loss))
                     
-                    if verbose == 1:
-                        print('Epoch #%d loss train = %.7f  loss_val = %.7f' % (epoch,
-                              loss_train, loss_val))
-                    
-                    # apply early stop
-                    if early_stop(val_losses, self.patience):
-                        print('Finished training config {} at epoch {}'.format(config_name, epoch))
-                        break
-                else:
-                    if verbose == 1:
-                        print('Epoch #%d loss train = %.7f' % (epoch,
-                              loss_train))
-                
-                
-                
-            if val:
-#                if folder_result and config_name:
-#                    log = {'train': train_losses, 'val': val_losses}
-#                    df_log = pd.DataFrame(log)
-#                    df_log.to_csv(error_file, index=None)
-                
-                plot_loss(train_losses, val_losses, history_file)
+                # apply early stop
+                if utils.early_stop(val_losses, self.patience):
+                    print('Finished training config {} at epoch {}'.format('config_name', epoch))
+                    break
             else:
-                plot_loss(train_losses)
-                
-            if test:
-                self.test(sess, test, None, mae_rmse_file)
-            
-            saver.save(sess, model_file)
+                if show_step is not 0 and epoch % show_step == 0:
+                    print('Epoch #%d loss train = %.7f' % (epoch,train_loss))
+        return train_losses, val_losses
     
-    
-    def train(self, sess, data):
-        encoder_x = data[0]
-        decoder_x = data[1]
-        decoder_y = data[2]
-
-        return self.multi_step(sess, encoder_x, decoder_x, decoder_y, True)
-    
-    def validate(self, sess, data):
-        encoder_x = data[0]
-        decoder_x = data[1]
-        decoder_y = data[2]
-        
-        return self.multi_step(sess, encoder_x, decoder_x, decoder_y, False)
-    
-    def test(self, sess, data, log_file=None, log_mae_rmse=None):
-        encoder_x = data[0]
-        decoder_x = data[1]
-        decoder_y = data[2]
+    def validate(self, test_set):
+        encoder_x = test_set[0]
+        decoder_x = test_set[1]
+        decoder_y = test_set[2]
         
         mae = []
         rmse = []
@@ -408,93 +374,84 @@ class EncoderDecoder(object):
         
         predict = []
         actual = []
-        try:
-            while True:
-                e_x = encoder_x[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                d_x = decoder_x[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                d_y = decoder_y[num_batches * self.batch_size : 
-                    (num_batches+1) * self.batch_size]
-                    
-                    
-                input_feed = {self.encoder_x: e_x,
-                                self.decoder_x: d_x,
-                                self.decoder_y: d_y}
+        
+        encoder_x = utils.padding(encoder_x, self.batch_size)
+        decoder_x = utils.padding(decoder_x, self.batch_size)
+        decoder_y = utils.padding(decoder_y, self.batch_size)
+        
+        num_batches = int(len(encoder_x)/self.batch_size)
+        if len(encoder_x) % self.batch_size != 0:
+            num_batches += 1
+        total_loss = 0.0
+        
+        for batch in range(num_batches):
+            e_x = encoder_x[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
+            d_x = decoder_x[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
+            d_y = decoder_y[batch * self.batch_size : 
+                (batch+1) * self.batch_size]
                 
-                output_feed = [self.pred_inverse, 
-                               self.y_inverse, 
-                               self.MAE, 
-                               self.RMSE, 
-                               self.loss]
-                    
-                outputs = sess.run(output_feed, input_feed)
+            input_feed = {self.encoder_x: e_x,
+                            self.decoder_x: d_x,
+                            self.decoder_y: d_y}
+            
+            output_feed = [self.pred_inverse, 
+                           self.y_inverse, 
+                           self.MAE, 
+                           self.RMSE, 
+                           self.loss]
                 
-                mae.append(outputs[2])
-                rmse.append(outputs[3])
-                total_loss += outputs[4]
-                num_batches += 1
-                
-                predict.extend(outputs[0][:, 0])
-                actual.extend(outputs[1][:, 0])
-        except tf.errors.InvalidArgumentError:
-            pass
+            outputs = self.sess.run(output_feed, input_feed)
+            
+            mae.append(outputs[2])
+            rmse.append(outputs[3])
+            total_loss += outputs[4]
+            num_batches += 1
+            
+            predict.extend(outputs[0][:, 0])
+            actual.extend(outputs[1][:, 0])
         mae = np.mean(mae)
         rmse = np.mean(rmse)
         avg_loss = total_loss / num_batches
         print('loss: %.7f  mae: %.7f  rmse: %.7f' % (avg_loss, mae, rmse))
+        
+        return predict, actual, mae, rmse
     
-        if log_mae_rmse:
-            with open(log_mae_rmse, 'a+') as f:
-                f.write('%f, %f\n' % (mae, rmse))
-            
-#        if log_file:
-#            log = {'predict': predict, 'actual': actual}
-#            df_log = pd.DataFrame(log)
-#            df_log.to_csv(log_file, index=None)
-
-
-
-############################# Test ######################################
-
-def test():
-    from config import Config
-    from data import Data
-    config = Config('config.json')
-    data = Data(config.data)
-    config.encoder_decoder['num_features'] = len(config.data['features'][0])
-    # prepare data
-    data.prepare_data_inputs_encoder(config.encoder_decoder['sliding_encoder'],
-                                config.encoder_decoder['sliding_decoder'])
-    train = data.get_data_encoder('train')
-    val = data.get_data_encoder('val')
-    test = data.get_data_encoder('test')
+    def fit(self, dataset, log_name):
+        history_img = log_name + '_history.png'
+        predict_log = log_name + '_predict.csv'
+        predict_log_img = log_name + '_predict.png'
+        model_file = log_name + '_model_ed.ckpt'
+        mae_rmse_log = log_name[0: log_name.rindex('/')+1] + 'mae_rmse_log.csv'
+        
+        dataset.prepare_data_inputs_encoder(self.encoder_sliding, self.decoder_sliding)
+        train = dataset.get_data_encoder('train')
+        val = dataset.get_data_encoder('val')
+        test = dataset.get_data_encoder('test')
+        
+        train_losses, val_losses = self.train(train, val, 50)
+        losses_dict = {'train_loss': train_losses, 'val_loss': val_losses}
+        utils.plot_log(losses_dict, ['epoch', 'loss'], history_img)
+        
+        
+        predict, actual, mae, rmse = self.validate(test)
+        test_dict = {'predict': predict, 'actual': actual}
+        utils.plot_log(test_dict, file_save=predict_log_img)
+        
+        df_test = pd.DataFrame(test_dict)
+        df_test.to_csv(predict_log, index=False)
+        
+        self.saver.save(self.sess, model_file)
+        
+        with open(mae_rmse_log, 'a+') as f:
+            f.write('%f, %f\n' % (mae, rmse))
+        
+    def predict(self, inputs):
+        pass
     
-    
-    #e_x = np.random.randn(100, 4, 1)
-    #d_x = np.random.randn(100, 4, 1)
-    #d_y = np.random.randn(100, 1)
-    #train = val = test = (e_x, d_x, d_y)
-    
-#    print(data.get_max_min())
-    a = EncoderDecoder(config.encoder_decoder, data.get_max_min())
-    a.fit(train, val, test, './log/', 'config')
-    #a = rnn_cell('gru', [2, 4])
-    #b = a.zero_state(8, tf.float32)
-    #
-    #
-    #sess = tf.Session()
-    #
-    #c = sess.run(b)
-    #for t in c:
-    #    print(t)
-    #    print('=============')
-    #    
-
-
-#test()
-
-
-
-
-
+    def close_sess(self):
+        self.sess.close()
+        
+        
+        

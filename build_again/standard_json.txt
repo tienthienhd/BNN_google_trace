@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Sep 16 20:47:29 2018
+
+@author: tienthien
+"""
+
+json config standard:
+{    
+    field 1: {
+        attribute 1:[value, value],
+        attribute 2:[value, value, values],
+        ....
+    }
+    
+    field 2: {
+            
+    }
+    
+    ...
+    
+}

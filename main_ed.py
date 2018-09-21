@@ -1,35 +1,19 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug 23 14:48:26 2018
+Created on Tue Sep 11 01:34:10 2018
 
 @author: tienthien
 """
-#from multiprocessing import Pool
+
 import multiprocessing as mp
 import os
 import pandas as pd
 from encoder_decoder import EncoderDecoder
-from config import Config
 from data import Data
 import sys
-import shutil
+import datetime
+import utils
 
-config_tuning_file = 'tuning_config.json'
-if len(sys.argv) > 1:
-    config_tuning_file = 'test.json'
-    
-config_tuning_file = 'test.json'
-
-print(config_tuning_file)
-
-log_dir = './log/results/'
-
-if os.path.exists(log_dir):
-    shutil.rmtree(log_dir)
-    os.mkdir(log_dir)
-else:
-    os.mkdir(log_dir)
 
 def tuning_encoder_model(inputs):
     dataset = inputs[0]
@@ -37,7 +21,7 @@ def tuning_encoder_model(inputs):
     ed_dir = inputs[2]
     config_name = inputs[3]
     
-    
+    print('Start:', config_name)
 #    print(dataset.get_max_min())
     ed_model = EncoderDecoder(encoder_decoder_config, dataset.get_max_min())
     
@@ -51,101 +35,74 @@ def tuning_encoder_model(inputs):
 #     fit encoder decoder model
     ed_model.fit(train, val, test, ed_dir, config_name, verbose=0)
     print('directory:{}  {}'.format(ed_dir, config_name))
-        
-
-def run(pool=None):
-    if pool:
-        multi_processing(pool)
-    else:
-        single_processing()
 
 
-def multi_processing(pool):
-    config = Config()
-    data_configs = config.generate_config('data', config_tuning_file)
-    df_data_configs = pd.DataFrame(data_configs, index=None)
-    df_data_configs.to_csv(log_dir+'data_config.csv', index=False)
-    del df_data_configs
-    
-    
-    config_list = []
-    for data_index, data_config in enumerate(data_configs):
-        data_dir = log_dir + 'data_config/' + str(data_index) + '/'
-        
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
-            
-        dataset = Data(data_config)
-        
-        ed_configs = config.generate_config('encoder_decoder')
-        df_ed_configs = pd.DataFrame(ed_configs, index=None)
-        df_ed_configs.to_csv(data_dir+'ed_config.csv', index=False)
-        del df_ed_configs
-        
-        for ed_index, ed_config in enumerate(ed_configs):
-            ed_dir = data_dir + 'encoder_decoder/'
-            if not os.path.exists(ed_dir):
-                os.makedirs(ed_dir)
-            config_name = 'config_' + str(ed_index)
-            ed_config['num_features'] = len(data_config['features'][0])
-            
-            tuning_config = (dataset, ed_config, ed_dir, config_name)
-            config_list.append(tuning_config)
-            
-            if len(config_list) == 64:
-                pool.map(tuning_encoder_model, config_list)
-                config_list.clear()
-                
-                
-    if len(config_list) > 0:
-        pool.map(tuning_encoder_model, config_list)
-        config_list.clear()
-        
-        
-def single_processing():
-    config = Config()
-    data_configs = config.generate_config('data', config_tuning_file)
-    df_data_configs = pd.DataFrame(data_configs, index=None)
-    df_data_configs.to_csv(log_dir+'data_config.csv', index=False)
-    del df_data_configs
-    
-    for data_index, data_config in enumerate(data_configs):
-        data_dir = log_dir + 'data_config/' + str(data_index) + '/'
-        
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
-            
-        dataset = Data(data_config)
-        
-        ed_configs = config.generate_config('encoder_decoder')
-        df_ed_configs = pd.DataFrame(ed_configs, index=None)
-        df_ed_configs.to_csv(data_dir+'ed_config.csv', index=False)
-        del df_ed_configs
-        
-        for ed_index, ed_config in enumerate(ed_configs):
-            ed_dir = data_dir + 'encoder_decoder/'
-            if not os.path.exists(ed_dir):
-                os.makedirs(ed_dir)
-                
-            config_name = 'config_' + str(ed_index)
-            ed_config['num_features'] = len(data_config['features'][0])
-            
-            tuning_config = (dataset, ed_config, ed_dir, config_name)
+
+def single_processing(config_dir, start_config):
+    # get config
+    configs_read = utils.read_config(config_dir+'configs.csv', 1000, start_config)
+    # loop config
+    for configs in configs_read:
+        for idx, config in configs.iterrows():
+            dataset = Data(config)
+            config_name = 'result_config_' + str(config[0])
+            tuning_config = (dataset, config, config_dir, config_name)
             tuning_encoder_model(tuning_config)
 
+
+def multi_processing(config_dir, pool, start_config):
+#    list_configs = []
+    configs_read = utils.read_config(config_dir+'configs.csv', 1000, start_config)
+    # loop config
+    for configs in configs_read:
+        for idx, config in configs.iterrows():
+            dataset = Data(config)
+            config_name = 'result_config_' + str(config[0])
+            tuning_config = (dataset, config, config_dir, config_name)
+            pool.apply_async(tuning_encoder_model, args=(tuning_config, ))
+#            list_configs.append(tuning_config)
+                    
+#            if len(list_configs) == 64:
+#                pool.map(tuning_encoder_model, list_configs)
+#                list_configs.clear()
+                        
+#    if len(list_configs) > 0:
+#        pool.map(tuning_encoder_model, list_configs)
+#        list_configs.clear()
+
+
 def main():
-    run()
-    
-#    if sys.argv[2] == 'multi':
-#        num_processes = mp.cpu_count()
-#        pool = mp.Pool(num_processes)
-#        run(pool)
-#        pool.close()
-#        pool.join()
-#        pool.terminate()           
-#    else:
-#        run()
-    
-            
-if __name__ == '__main__':            
+    if len(sys.argv) < 3:
+        print('Not enough parameters. Please put json filename and mode running')
+    else:
+        
+        log_dir = './log/'
+        results_dir = log_dir + 'results_' + str(datetime.datetime.now().date()) + '/'
+        if not os.path.exists(results_dir):
+            os.mkdir(results_dir)
+        
+        json_config_file = sys.argv[1]
+        mode_running = sys.argv[2]
+        start_config = 0
+        if len(sys.argv) == 4:
+            start_config = int(sys.argv[3])
+        
+        if not os.path.exists(results_dir+'configs.csv'):
+            utils.generate_config(json_config_file, results_dir)
+        
+        
+        
+        if mode_running == 'multi':
+            num_processes = mp.cpu_count()
+            print('Run on', num_processes, 'process')
+            pool = mp.Pool(2)
+            multi_processing(results_dir, pool, start_config)
+            pool.close()
+            pool.join()
+            pool.terminate()
+        else:
+            single_processing(results_dir, start_config)
+        
+        
+if __name__ == '__main__':
     main()

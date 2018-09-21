@@ -50,7 +50,7 @@ class MLP(object):
     def __init__(self, config=None, max_min=None):
         tf.reset_default_graph()
         
-        elf.hidden_layers = config['hidden_layers']
+        self.hidden_layers = config['hidden_layers']
         self.activation = tf.nn.tanh
         self.num_epochs = config['num_epochs']
         

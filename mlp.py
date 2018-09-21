@@ -35,6 +35,8 @@ class MLP(object):
         self.batch_size = config['batch_size']
         self.optimizer = tf.train.AdamOptimizer()
         
+        
+        
         if max_min:
             self.max = max_min[0]
             self.min = max_min[1]
