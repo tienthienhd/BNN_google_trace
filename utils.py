@@ -1,13 +1,16 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 10 21:56:49 2018
+Created on Sun Sep 16 19:24:16 2018
 
 @author: tienthien
 """
+
 import re 
 import pandas as pd
 import numpy as np
 import json
+import matplotlib.pyplot as plt
 from sklearn.model_selection import ParameterGrid
 
 def parse_string_to_array_int(string):
@@ -42,7 +45,7 @@ def parse_string_to_array_list(string):
 
     
 def read_config(filename, chunksize=None, start_config=None):
-    if chunksize:
+    if chunksize is not None:
         for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1)):
             if 'layers_units' in chunk:
                 chunk[['layers_units']] = chunk[['layers_units']].apply(parse_string_to_array_int)
@@ -50,6 +53,8 @@ def read_config(filename, chunksize=None, start_config=None):
                 chunk[['columns_full']] = chunk[['columns_full']].apply(parse_string_to_array_string)
             if 'features' in chunk:
                 chunk[['features']] = chunk[['features']].apply(parse_string_to_array_list)
+            if 'hidden_layers' in chunk:
+                chunk[['hidden_layers']] = chunk[['hidden_layers']].apply(parse_string_to_array_int)
             yield chunk
     else:
         return pd.read_csv(filename)
@@ -57,38 +62,75 @@ def read_config(filename, chunksize=None, start_config=None):
       
 
 
-def generate_config(json_file, config_dir):
+def generate_config(json_file, file_to_save, list_field=None):
     json_configs = None
     with open(json_file, 'r') as f:
         json_configs = json.load(f)
     
-    data_ed_configs = json_configs['data']
-    data_ed_configs.update(json_configs['encoder_decoder'])
+    configs_dict = dict()
+    if list_field is None:
+        for key, value in json_configs.items():
+            configs_dict.update(value)
+    else:
+        for key in list_field:
+            configs_dict.update(json_configs[key])
     
-    configs = list(ParameterGrid(data_ed_configs))
+    configs = list(ParameterGrid(configs_dict))
     df = pd.DataFrame(configs, index=None)
-    df.to_csv(config_dir+'configs.csv', index=True)
+    df = df.sample(frac=1).reset_index(drop=True)
+    df.to_csv(file_to_save, index=True)
     
     
-        
-#generate_config('test.json', './log/')
-#a = read_config('./log/results_2018-09-16/configs.csv', 10000, 0)
-#for i in a:
-#    print(i)
-              
-#a = read_config_ed('./log/results_10_9/data_config/0/ed_config.csv', 1000)
-#for i in a:
-#    for y in i.columns:
-#        print(y, i[y].dtype)
-#    b = i['layers_units'].values
-#    b = list(b)
-#    break
-#        
-#a = read_config_data('./log/results_10_9/data_config.csv')
-#for i in a:
-#    for y in i.columns:
-#        print(y, i[y].dtype)
-#        
-#    break
+#generate_config('../tuning_config.json', '../log/', ['data', 'mlp'])
     
+#a = read_config('../log/configs.csv')
+#print(a)
+    
+    
+    
+def plot_log(log_dict, metrics=None, file_save=None):
+    for key, value in log_dict.items():
+        plt.plot(range(len(value)), value, label=key)
+    if metrics:
+        plt.xlabel(metrics[0])
+        plt.ylabel(metrics[1])
+    
+    plt.legend()
+    plt.savefig(file_save)
+#    plt.show()
+    plt.clf()
+    
+def padding(array, batch_size, pos=0, values=0):
+    padding_len = batch_size -len(array) % batch_size
+    rank = len(array.shape)
+    rank_pad_value = rank - 1
+    shape_pad_value = []
+    padding_values = []
+    for i in range(rank_pad_value):
+        shape_pad_value.append(array.shape[i+1])
+    
+    for i in range(padding_len):
+        padding_values.append(np.full(shape_pad_value, values, dtype=np.float32))
+    
+    result = np.array(padding_values)
+    if pos == 0:
+        result = np.concatenate((result, array))
+    elif pos == 1:
+        result = np.concatenate((array, result))
+    
+    return result
 
+def early_stop(array, patience=0, min_delta=0.0):
+    if len(array) <= patience :
+        return False
+    
+    value = array[len(array) - patience - 1]
+    arr = array[len(array)-patience:]
+    check = 0
+    for val in arr:
+        if(val - value > min_delta):
+            check += 1
+    if(check == patience):
+        return True
+    else:
+        return False

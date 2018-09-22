@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Aug 10 22:31:29 2018
+Created on Sun Sep 16 19:24:36 2018
 
-@author: HP Zbook 15
+@author: tienthien
 """
+
 import pandas as pd
 import numpy as np
 
@@ -138,7 +140,7 @@ class Data(object):
         x = data.iloc[:, index_x:index_y].values
         x = x.reshape((x.shape[0], self.sliding['mlp'], self.num_features))
         
-        y = data.iloc[:, index_y:].values
+        y = data.iloc[:, index_y:index_y+1].values
         
         return x, y
         
