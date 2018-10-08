@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 import utils
 
 
+import matplotlib
+matplotlib.use('Agg')
+
 def rnn_cell(rnn_unit,
              layers_units, 
              activation='tanh', 
@@ -70,14 +73,11 @@ def rnn_cell(rnn_unit,
                                  output_keep_prob=output_keep_prob,
                                  state_keep_prob=state_keep_prob,
                                  variational_recurrent=variational_recurrent,
+#                                 input_size=2, #FIXME
                                  dtype=tf.float32)
         cells.append(cell)
     return tf.nn.rnn_cell.MultiRNNCell(cells)
         
-
-    
-
-    
 
 def get_state_variables(rnn_unit_type, batch_size, cell):
     # For each layer, get the initial state and make a variable out of it
@@ -111,11 +111,6 @@ def get_state_update_op(rnn_unit_type, state_variables, new_states):
     # The tuple's actual value should not be used.
     return tf.tuple(update_ops)
 
-
-
-
-
-    
     
 class EncoderDecoder(object):
     def __init__(self, config=None, sess=None, max_min_data=None):
@@ -135,6 +130,16 @@ class EncoderDecoder(object):
         
         self.batch_size = config['batch_size']
         self.num_epochs = config['num_epochs']
+
+        if config['optimizer'] == 'adam':
+            self.optimize = tf.train.AdamOptimizer(config['learning_rate'])
+        elif config['optimizer'] == 'rmsprop':
+            self.optimize = tf.train.RMSPropOptimizer(config['learning_rate'])
+        elif config['optimizer'] == 'grad':
+            self.optimize = tf.train.GradientDescentOptimizer(config['learning_rate'])
+        elif config['optimizer'] == 'ad':
+            self.optimize = tf.train.AdagradOptimizer(config['learning_rate'])
+
         self.num_features = len(config['features'][0])
         
         self.patience = config['patience']
@@ -151,8 +156,6 @@ class EncoderDecoder(object):
             self.sess = tf.Session()
             
         self.sess.run(tf.global_variables_initializer())
-
-
 
     def build_model(self):
         '''Build model with hyperparameters got when create object model encoder
@@ -243,10 +246,9 @@ class EncoderDecoder(object):
             with tf.name_scope('loss_optimizer'):
                 self.loss = tf.reduce_mean(tf.squared_difference(pred_decoder, 
                                                             self.decoder_y))
-                self.optimizer  = tf.train.AdamOptimizer().minimize(self.loss)
+                self.optimizer  = self.optimize.minimize(self.loss)
         
         self.saver = tf.train.Saver()
-
 
     def step(self, encoder_x, decoder_x, decoder_y, is_train=False):
         '''Feed input each step. Inputs is encoder_x, decoder_x, decoder_y.
@@ -336,18 +338,18 @@ class EncoderDecoder(object):
             val_decoder_x = train_set[1]
             val_decoder_y = train_set[2]
             
-        train_losses = []
-        val_losses = []
+        train_losses = np.zeros((self.num_epochs))
+        val_losses = np.zeros((self.num_epochs))
         
         for epoch in range(self.num_epochs):
             train_loss = self.multi_step(train_encoder_x, train_decoder_x, 
                                          train_decoder_y, True)
-            train_losses.append(train_loss)
+            train_losses[epoch] = train_loss
             
             if val_set:
                 val_loss = self.multi_step(val_encoder_x, val_decoder_x, 
                                            val_decoder_y, False)
-                val_losses.append(val_loss)
+                val_losses[epoch] = val_loss
                 
                 if show_step is not 0 and epoch % show_step == 0:
                     print('Epoch #%d loss train = %.7f  loss_val = %.7f' % (epoch,
@@ -433,8 +435,7 @@ class EncoderDecoder(object):
         train_losses, val_losses = self.train(train, val, 50)
         losses_dict = {'train_loss': train_losses, 'val_loss': val_losses}
         utils.plot_log(losses_dict, ['epoch', 'loss'], history_img)
-        
-        
+
         predict, actual, mae, rmse = self.validate(test)
         test_dict = {'predict': predict, 'actual': actual}
         utils.plot_log(test_dict, file_save=predict_log_img)
@@ -452,6 +453,3 @@ class EncoderDecoder(object):
     
     def close_sess(self):
         self.sess.close()
-        
-        
-        

@@ -1,4 +1,5 @@
 tmp.py
 .spyproject/*
 __pycache__/*
+.idea/*
 tuning_config (copy).json

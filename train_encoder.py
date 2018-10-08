@@ -1,19 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Sep 16 21:26:42 2018
-
-@author: tienthien
-"""
-
 import sys
 import datetime
 import shutil
+import argparse
 import os
 import pandas as pd
 import utils
 from data import Data
 from encoder_decoder import EncoderDecoder
+import multiprocessing as mp
+
+
+def run_config(config_):
+    results_dir, config, idx = config_
+    print('Start config', idx)
+    dataset = Data(config)
+    model = EncoderDecoder(config=config, 
+                           max_min_data=dataset.get_max_min())
+    model.fit(dataset, results_dir+str(idx))
+    model.close_sess()
+    print('Finish config', idx)
+    print('=========================================================')
 
 
 def single_processing(results_dir, start_config):
@@ -21,16 +27,31 @@ def single_processing(results_dir, start_config):
 
     for configs in configs_ed:
         for idx, config in configs.iterrows():
-            print('Start config', idx)
-            dataset = Data(config)
-            model = EncoderDecoder(config=config, 
-                                   max_min_data=dataset.get_max_min())
-            model.fit(dataset, results_dir+str(idx))
-            model.close_sess()
-            print('Finish config', idx)
-            print('=========================================================')
+            run_config((results_dir, config, idx))
 
-def process_results_ed(results_dir):
+
+def multi_processing(results_dir, start_config):
+    num_cpus = mp.cpu_count()
+    pool = mp.Pool(num_cpus)
+    
+    configs_ed= utils.read_config(results_dir + 'configs_ed.csv', 1000, start_config)
+    list_configs = []
+    for configs in configs_ed:
+        for idx, config in configs.iterrows():
+            list_configs.append((results_dir, config, idx))
+            if len(list_configs) >= 64:
+                pool.map(run_config, list_configs)
+                list_configs.clear()
+    if len(list_configs) > 0:
+        pool.map(run_config, list_configs)
+        list_configs.clear()
+    
+    pool.close()
+    pool.join()
+    pool.terminate()
+    
+
+def process_results_ed(results_dir): #FIXME: neu chi co cpu univariate
     if not os.path.exists('./log/models/'):
         os.mkdir('./log/models/')
     
@@ -38,7 +59,7 @@ def process_results_ed(results_dir):
     configs_file = results_dir + 'configs_ed.csv'
     
     df_mae_rmse = pd.read_csv(mae_rmse_file, names=['mae', 'rmse'])
-    df_configs = pd.read_csv(configs_file)
+    df_configs = pd.read_csv(configs_file, nrows=df_mae_rmse.shape[0])
     
     df_resutls = pd.concat([df_configs, df_mae_rmse], axis=1)
     
@@ -111,28 +132,40 @@ def process_results_ed(results_dir):
                 dest_dir+'mem_multivariate'+tail_files[2])
     
 
-
 def main():
-    if len(sys.argv) < 2:
-        print('Not enough parameters.')
-        return None
+    parser = argparse.ArgumentParser()
+    parser.add_argument('config_file', help='Path of config file with format json')
+    parser.add_argument('--start_config', help='Index start on list config', type=int)
+    parser.add_argument('--new_config', help='Generate new config with config file', type=int, choices=[0,1])
+    parser.add_argument('--mp', help='Running with multiprocess', type=int, choices=[0,1])
+    args = parser.parse_args()
+    
+    json_config_file = args.config_file
+    start_config = args.start_config
+    if start_config is None:
+        start_config = 0
+    new_config = args.new_config
+    multi_p = args.mp
+    
+        
+#    print(json_config_file, start_config, new_config)
+    
     log_dir = './log/'
-#    results_dir = log_dir + 'results_' + str(datetime.datetime.now().date()) + '/'
     results_dir = log_dir + 'results_ed/'
     if not os.path.exists(results_dir):
         os.mkdir(results_dir)
-    
-    json_config_file = sys.argv[1]
-    start_config = 0
-    if len(sys.argv) == 3:
-        start_config = int(sys.argv[2])
-    
-    if not os.path.exists(results_dir + 'configs_ed.csv') or sys.argv[3] == 'new_config':
+    if start_config == 0 and os.path.exists('./log/results_ed/mae_rmse_log.csv'):
+        os.remove('./log/results_ed/mae_rmse_log.csv')
+#    
+    if not os.path.exists(results_dir + 'configs_ed.csv') or new_config == 1:
         utils.generate_config(json_config_file, results_dir+'configs_ed.csv', 
                               ['data', 'encoder_decoder'])
-    
-    single_processing(results_dir, start_config)
-    process_results_ed('./log/results_ed/')
+    if multi_p == 1:
+        multi_processing(results_dir, start_config)
+    else:
+        single_processing(results_dir, start_config)
+#    process_results_ed('./log/results_ed/')
+
 
 if __name__ == '__main__':
     main()

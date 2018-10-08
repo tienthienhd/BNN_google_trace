@@ -11,6 +11,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import utils
+
+#import matplotlib
+#matplotlib.use('Agg')
     
 class MLP(object):
     def __init__(self, sess=None, config=None, max_min_data=None, type_model=None):
@@ -34,7 +37,7 @@ class MLP(object):
         
         self.batch_size = int(config['batch_size'])
         self.optimizer = tf.train.AdamOptimizer()
-        self.dropout_rate = 0.9
+        self.dropout_rate = config['dropout_rate']
         self.patience = config['patience']
         
 #        type_model = 'mem_multivariate_ed'
@@ -265,3 +268,4 @@ class MLP(object):
     
     def close_sess(self):
         self.sess.close()
+        

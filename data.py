@@ -50,8 +50,14 @@ def split_data(data, val_size=0.2, test_size=0.2):
 class Data(object):
     def __init__(self, config):
         datapath = config["data_directory"] + config["data_name"] + '.csv'
+        names = ["time_stamp", "numberOfTaskIndex", "numberOfMachineId",
+             "meanCPUUsage", "canonical_memory_usage", "AssignMem",
+             "unmapped_cache_usage", "page_cache_usage", "max_mem_usage",
+             "mean_diskIO_time", "mean_local_disk_space", "max_cpu_usage",
+             "max_disk_io_time", "cpi", "mai", "sampling_portion",
+             "agg_type", "sampled_cpu_usage"]
         df = pd.read_csv(datapath, header=None, 
-                         names = config['columns_full'])
+                         names = names)
         df = df.loc[:, config['features'][0]]
 #        df.plot()
 #        df = df.loc[:, config.common['features']]

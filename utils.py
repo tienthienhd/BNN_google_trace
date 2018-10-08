@@ -44,9 +44,9 @@ def parse_string_to_array_list(string):
 
 
     
-def read_config(filename, chunksize=None, start_config=None):
+def read_config(filename, chunksize=None, start_config=None, num_configs=None):
     if chunksize is not None:
-        for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1)):
+        for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1), nrows=num_configs):
             if 'layers_units' in chunk:
                 chunk[['layers_units']] = chunk[['layers_units']].apply(parse_string_to_array_int)
             if 'columns_full' in chunk:

@@ -10,6 +10,7 @@ import sys
 import datetime
 import pandas as pd
 import shutil
+import argparse
 import os
 import utils
 from data import Data
@@ -55,8 +56,10 @@ def single_processing(results_dir, start_config):
             model.close_sess()
             print('Finish config', idx)
             print('=========================================================')
+#        if configs_ed.
             
 def process_results_mlp(results_dir):
+    print('Processing results')
     if not os.path.exists('./log/models/'):
         os.mkdir('./log/models/')
 
@@ -134,25 +137,35 @@ def process_results_mlp(results_dir):
                 dest_dir+'mem_multivariate'+tail_files[2])
 
 def main():
-    if len(sys.argv) < 2:
-        print('Not enough parameters.')
-        return None
+    parser = argparse.ArgumentParser()
+    parser.add_argument('config_file', help='Path of config file with format json')
+    parser.add_argument('--start_config', help='Index start on list config', type=int)
+    parser.add_argument('--new_config', help='Generate new config with config file', type=int, choices=[0,1])
+    parser.add_argument('--mp', help='Running with multiprocess', type=int, choices=[0,1])
+    args = parser.parse_args()
+    
+    json_config_file = args.config_file
+    start_config = args.start_config
+    if start_config is None:
+        start_config = 0
+    new_config = args.new_config
+    multi_p = args.mp
+    
     log_dir = './log/'
     results_dir = log_dir + 'results_mlp/'
     if not os.path.exists(results_dir):
         os.mkdir(results_dir)
     
-    json_config_file = sys.argv[1]
-    start_config = 0
-    if len(sys.argv) == 3:
-        start_config = int(sys.argv[2])
+        
+    if start_config == 0 and os.path.exists('./log/results_mlp/mae_rmse_log.csv'):
+        os.remove('./log/results_mlp/mae_rmse_log.csv')
     
     if not os.path.exists(results_dir + 'configs_mlp.csv') or sys.argv[3] == 'new_config':
         utils.generate_config(json_config_file, results_dir+'configs_mlp.csv', 
                               ['data', 'mlp'])
     
     single_processing(results_dir, start_config)
-    process_results_mlp('./log/results_mlp/')
+#    process_results_mlp('./log/results_mlp/')
 
 if __name__ == '__main__':
     main()
