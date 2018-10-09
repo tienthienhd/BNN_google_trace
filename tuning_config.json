@@ -1,8 +1,7 @@
 {
     "data": {
         "data_directory": ["./data/"],
-        "data_name": ["data_resource_usage_5Minutes_6176858948"
-                      ],
+        "data_name": ["data_resource_usage_5Minutes_6176858948"],
         "features": [[["meanCPUUsage"], ["meanCPUUsage"]]]
     },
     
@@ -19,8 +18,8 @@
         "sliding_decoder": [2, 4],
         
         "layers_units":[[16, 4], [32, 4], [64, 4]],
-        "num_epochs": [2000],
-        "optimizer":["adam", "rmsprop"],
+        "num_epochs": [200],
+        "optimizer":["rmsprop", "adam"],
         "learning_rate": [0.005],
         "patience": [20]
     },

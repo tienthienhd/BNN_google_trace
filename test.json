@@ -19,6 +19,8 @@
         
         "layers_units":[[4]],
         "num_epochs": [100],
+        "optimizer":["rmsprop"],
+        "learning_rate": [0.005],
         "patience": [10]
     },
     
