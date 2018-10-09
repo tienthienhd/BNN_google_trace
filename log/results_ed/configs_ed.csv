@@ -1,2 +1,0 @@
-,activation,batch_size,data_directory,data_name,features,input_keep_prob,layers_units,learning_rate,num_epochs,optimizer,output_keep_prob,patience,rnn_unit_type,sliding_decoder,sliding_encoder,state_keep_prob,variational_recurrent
-0,tanh,64,./data/,data_resource_usage_5Minutes_6176858948,"[['meanCPUUsage'], ['meanCPUUsage']]",1.0,[4],0.005,100,rmsprop,0.8,10,lstm,4,6,0.8,True
