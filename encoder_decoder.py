@@ -16,6 +16,7 @@ import utils
 import matplotlib
 matplotlib.use('Agg')
 
+
 def rnn_cell(rnn_unit,
              layers_units, 
              activation='tanh', 
@@ -199,8 +200,7 @@ class EncoderDecoder(object):
             # update variables encoder state
             self.update_op = get_state_update_op(self.rnn_unit, encoder_state, 
                                                  new_state)
-                        
-            
+
             # identity for encoder outputs to load indivial encoder_outputs
             encoder_outputs = tf.identity(encoder_outputs, 
                                           name='encoder_outputs')
@@ -223,7 +223,8 @@ class EncoderDecoder(object):
             
             # output dense layer
             pred_decoder = tf.layers.dense(inputs=decoder_outputs[:, -1, :], 
-                                           units=1, 
+                                           units=1,
+                                           activation=self.activation,
                                            name='dense_output')      
             pred_decoder = tf.identity(pred_decoder, 'decoder_pred')
         
@@ -296,34 +297,6 @@ class EncoderDecoder(object):
         avg_loss = total_loss / num_batches
         
         return avg_loss
-        
-                
-                
-#        num_batches = 0
-#        total_loss = 0.0
-#        
-#        try:
-#            while True:
-#                e_x = encoder_x[num_batches * self.batch_size : 
-#                    (num_batches+1) * self.batch_size]
-#                d_x = decoder_x[num_batches * self.batch_size : 
-#                    (num_batches+1) * self.batch_size]
-#                d_y = decoder_y[num_batches * self.batch_size : 
-#                    (num_batches+1) * self.batch_size]
-#                    
-#                _loss = self.step(e_x, d_x, d_y, is_train)
-#                
-#                total_loss += _loss
-#                num_batches += 1
-#        except tf.errors.InvalidArgumentError:
-#            ''' if exception appear then this is last batch . The last batch not
-#            enough examples to feed through graph because state of encoder is
-#            fixed'''
-#            pass
-#        
-#        avg_loss = total_loss / num_batches
-#        
-#        return avg_loss
     
     def train(self, train_set, val_set=None, show_step=10):
         train_encoder_x = train_set[0]

@@ -6,22 +6,22 @@
     },
     
     "encoder_decoder": {
-        "activation": ["tanh"],
+        "activation": ["relu"],
         "rnn_unit_type": ["lstm"],
         "input_keep_prob": [1.0],
         "output_keep_prob": [0.8],
         "state_keep_prob": [0.8],
         "variational_recurrent": [true],
         
-        "batch_size":[64],
-        "sliding_encoder": [6],
+        "batch_size":[32],
+        "sliding_encoder": [24],
         "sliding_decoder": [4],
         
-        "layers_units":[[4]],
+        "layers_units":[[32, 4]],
         "num_epochs": [100],
         "optimizer":["rmsprop"],
         "learning_rate": [0.005],
-        "patience": [10]
+        "patience": [20]
     },
     
     "mlp": {
