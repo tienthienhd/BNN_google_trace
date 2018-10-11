@@ -12,6 +12,8 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 from sklearn.model_selection import ParameterGrid
+import tensorflow as tf
+
 
 def parse_string_to_array_int(string):
     results = []
@@ -20,7 +22,8 @@ def parse_string_to_array_int(string):
         objects = list(map(int, objects))
         results.append(objects)
     return results
-    
+
+
 def parse_string_to_array_string(string):
     results = []
     for s in string:
@@ -28,7 +31,8 @@ def parse_string_to_array_string(string):
         objects = list(map(str, objects))
         results.append(objects)
     return results
-    
+
+
 def parse_string_to_array_list(string):
     results = []
     for s in string:
@@ -38,13 +42,8 @@ def parse_string_to_array_list(string):
         results.append(objects)
     return results
 
-
-#string =  ['[["meanCPUUsage", "canonical_memory_usage"], ["canonical_memory_usage"]]']
-#a = parse_string_to_array_list(string)
-
-
     
-def read_config(filename, chunksize=None, start_config=None, num_configs=None):
+def read_config(filename, chunksize=None, start_config=0, num_configs=None):
     if chunksize is not None:
         for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1), nrows=num_configs):
             if 'layers_units' in chunk:
@@ -59,8 +58,6 @@ def read_config(filename, chunksize=None, start_config=None, num_configs=None):
     else:
         return pd.read_csv(filename)
             
-      
-
 
 def generate_config(json_file, file_to_save, list_field=None):
     json_configs = None
@@ -80,14 +77,7 @@ def generate_config(json_file, file_to_save, list_field=None):
     df = df.sample(frac=1).reset_index(drop=True)
     df.to_csv(file_to_save, index=True)
     
-    
-#generate_config('../tuning_config.json', '../log/', ['data', 'mlp'])
-    
-#a = read_config('../log/configs.csv')
-#print(a)
-    
-    
-    
+
 def plot_log(log_dict, metrics=None, file_save=None):
     for key, value in log_dict.items():
         plt.plot(range(len(value)), value, label=key)
@@ -99,9 +89,14 @@ def plot_log(log_dict, metrics=None, file_save=None):
     plt.savefig(file_save)
 #    plt.show()
     plt.clf()
-    
+
+
 def padding(array, batch_size, pos=0, values=0):
-    padding_len = batch_size -len(array) % batch_size
+    # padding_len = 0
+    if batch_size < len(array):
+        padding_len = batch_size - len(array) % batch_size
+    else:
+        return array[:batch_size]
     rank = len(array.shape)
     rank_pad_value = rank - 1
     shape_pad_value = []
@@ -113,19 +108,20 @@ def padding(array, batch_size, pos=0, values=0):
         padding_values.append(np.full(shape_pad_value, values, dtype=np.float32))
     
     result = np.array(padding_values)
-    if pos == 0:
+    if pos == 0:  # pad on head
         result = np.concatenate((result, array))
-    elif pos == 1:
+    elif pos == 1:  # pad on tail
         result = np.concatenate((array, result))
     
     return result
 
-def early_stop(array, patience=0, min_delta=0.0):
-    if len(array) <= patience :
+
+def early_stop(array, idx, patience=0, min_delta=0.0):
+    if idx <= patience :
         return False
     
-    value = array[len(array) - patience - 1]
-    arr = array[len(array)-patience:]
+    value = array[idx - patience - 1]
+    arr = array[idx-patience:]
     check = 0
     for val in arr:
         if(val - value > min_delta):
@@ -134,3 +130,30 @@ def early_stop(array, patience=0, min_delta=0.0):
         return True
     else:
         return False
+
+
+def activation(name):
+    if name == 'tanh':
+        return tf.nn.tanh
+    elif name == 'sigmoid':
+        return tf.nn.sigmoid
+    elif name == 'relu':
+        return tf.nn.relu
+    elif name == 'elu':
+        return tf.nn.elu
+    else:
+        raise Exception(name + " is not available!")
+
+
+def optimizer(name, learning_rate=0.001):
+    if name == 'adam':
+        return tf.train.AdamOptimizer()
+    elif name == 'gradient':
+        return tf.train.GradientDescentOptimizer(learning_rate)
+    elif name == 'momemtum':
+        return tf.train.MomentumOptimizer(learning_rate=learning_rate, momentum=0.7)
+    elif name == 'rmsprop':
+        return tf.train.RMSPropOptimizer(learning_rate=learning_rate)
+    else:
+        raise Exception(name + " is not available!")
+

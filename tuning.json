@@ -6,8 +6,8 @@
     },
     
     "encoder_decoder": {
-        "activation": ["tanh", "sigmoid", "relu"],
-        "rnn_unit_type": ["lstm", "gru"],
+        "activation": ["tanh", "sigmoid"],
+        "rnn_unit_type": ["lstm"],
         "input_keep_prob": [1.0],
         "output_keep_prob": [0.95],
         "state_keep_prob": [0.95],
@@ -25,13 +25,14 @@
     },
     
     "mlp": {
-        "input_dim":[6, 12, 18],
+        "sliding_inference":[8, 10],
         "dropout_rate": [0.6, 0.8],
-        "batch_size":[8, 16, 32, 64],
-        "num_epochs":[500],
-        "hidden_layers": [[8, 10]],
-        "activation": ["relu", "sigmoid", "tanh"],
-        "optimizer": ["adam"],
+        "batch_size":[32],
+        "num_epochs":[100],
+        "hidden_layers": [[8, 10], [4], [10]],
+        "activation": ["sigmoid", "tanh"],
+        "optimizer": ["adam", "rmsprop"],
+        "learning_rate": [0.005],
         "patience": [10]
     }
 

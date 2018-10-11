@@ -6,33 +6,34 @@
     },
     
     "encoder_decoder": {
-        "activation": ["relu"],
+        "activation": ["tanh"],
         "rnn_unit_type": ["lstm"],
         "input_keep_prob": [1.0],
-        "output_keep_prob": [0.8],
-        "state_keep_prob": [0.8],
+        "output_keep_prob": [0.95],
+        "state_keep_prob": [0.95],
         "variational_recurrent": [true],
         
         "batch_size":[32],
         "sliding_encoder": [24],
         "sliding_decoder": [4],
         
-        "layers_units":[[32, 4]],
-        "num_epochs": [100],
+        "layers_units":[[16, 4]],
+        "num_epochs": [1000],
         "optimizer":["rmsprop"],
-        "learning_rate": [0.005],
+        "learning_rate": [0.001],
         "patience": [20]
     },
     
     "mlp": {
-        "input_dim":[12],
-        "dropout_rate": [0.6],
+        "sliding_inference":[8],
+        "dropout_rate": [0.95],
         "batch_size":[32],
         "num_epochs":[100],
         "hidden_layers": [[16, 8, 4]],
         "activation": ["tanh"],
         "optimizer": ["adam"],
-        "patience": [10]
+        "learning_rate": [0.001],
+        "patience": [20]
     }
 
 }

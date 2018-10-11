@@ -1,13 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Sep 16 19:24:36 2018
-
-@author: tienthien
-"""
-
 import pandas as pd
 import numpy as np
+
 
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     n_vars = 1 if type(data) is list else data.shape[1]
@@ -31,7 +24,8 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     if(dropnan):
         agg.dropna(inplace=True)
     return agg
-    
+
+
 def split_data(data, val_size=0.2, test_size=0.2):   
         ntest = int(round(len(data) * (1 - test_size)))
         nval = int(round(len(data.iloc[:ntest]) * (1 - val_size)))
@@ -46,6 +40,7 @@ def split_data(data, val_size=0.2, test_size=0.2):
         data['test'] = df_test
         
         return data
+
 
 class Data(object):
     def __init__(self, config):
@@ -69,8 +64,7 @@ class Data(object):
         self.normalize()
         
         self.sliding = dict()
-        
-        
+
     def normalize(self):
         self.min = dict()
         self.max = dict()
@@ -105,12 +99,16 @@ class Data(object):
         
         self.data = split_data(data)
         
-    def prepare_data_inputs_mlp(self, input_dim=1):
-        self.sliding['mlp'] = input_dim
-        data = series_to_supervised(self.df, input_dim, 1)
+    def prepare_data_inputs_mlp(self, sliding_encoder=1, sliding_inference=1):
+        self.sliding['encoder'] = sliding_encoder
+        self.sliding['mlp'] = sliding_inference
+        sliding = max(sliding_inference, sliding_encoder)
+        data_encoder = series_to_supervised(self.df, sliding, 1)
+        data_mlp = series_to_supervised(self.df, sliding, 1)
+        data = pd.concat([data_encoder, data_mlp], axis=1)
+        data.dropna(inplace=True)
         self.data = split_data(data)
-        
-        
+
     def get_data_encoder(self, dataset):
         data = self.data[dataset] # train, val or test
         data = data.astype(np.float32)
@@ -126,8 +124,7 @@ class Data(object):
                                        self.num_features))
         
         encoder_y = data.iloc[:, index_encoder_y:index_encoder_y+1].values
-        
-        
+
         decoder_x = data.iloc[:, index_decoder_x:index_decoder_y].values
         decoder_x = decoder_x.reshape((decoder_x.shape[0], self.sliding['decoder'], 
                                        self.num_features))
@@ -139,14 +136,18 @@ class Data(object):
     def get_data_mlp(self, dataset):
         data = self.data[dataset]
         data = data.astype(np.float32)
+
+        sliding = max(self.sliding['encoder'], self.sliding['mlp'])
+        data_encoder = data.iloc[:, 0:sliding*self.num_features+1]
+        data_mlp = data.iloc[:, (sliding+1)*self.num_features:(2*sliding + 2)*self.num_features]
         
-        index_x = 0
-        index_y = self.sliding['mlp'] * self.num_features
+        e_x = data_encoder.iloc[:,-self.sliding['encoder']-1:-1].values
+        mlp_x = data_mlp.iloc[:, -self.sliding['mlp']-1:-1].values
+        mlp_y = data_mlp.iloc[:, -1].values # FIXME: fix to number features
         
-        x = data.iloc[:, index_x:index_y].values
-        x = x.reshape((x.shape[0], self.sliding['mlp'], self.num_features))
+        e_x = e_x.reshape((e_x.shape[0], e_x.shape[1], self.num_features))
+        mlp_x = mlp_x.reshape((mlp_x.shape[0], mlp_x.shape[1], self.num_features))
+        mlp_y = mlp_y.reshape((mlp_y.shape[0], 1))
         
-        y = data.iloc[:, index_y:index_y+1].values
-        
-        return x, y
+        return e_x, mlp_x, mlp_y
         

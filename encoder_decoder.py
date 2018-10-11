@@ -53,17 +53,18 @@ def rnn_cell(rnn_unit,
     else:
         raise Exception('Choose a valid RNN unit type.')
         
-    if activation == 'tanh':
-        activation = tf.nn.tanh
-    elif activation == 'sigmoid':
-        activation = tf.nn.sigmoid
-    elif activation == 'relu':
-        activation = tf.nn.relu
-    elif activation == 'elu':
-        activation = tf.nn.elu
-    else:
-        raise Exception('Choose a valid activation')
-    
+    # if activation == 'tanh':
+    #     activation = tf.nn.tanh
+    # elif activation == 'sigmoid':
+    #     activation = tf.nn.sigmoid
+    # elif activation == 'relu':
+    #     activation = tf.nn.relu
+    # elif activation == 'elu':
+    #     activation = tf.nn.elu
+    # else:
+    #     raise Exception('Choose a valid activation')
+
+    activation = utils.activation(activation)
     
     
     cells = []
@@ -311,8 +312,8 @@ class EncoderDecoder(object):
             val_decoder_x = train_set[1]
             val_decoder_y = train_set[2]
             
-        train_losses = np.zeros((self.num_epochs))
-        val_losses = np.zeros((self.num_epochs))
+        train_losses = np.zeros(self.num_epochs)
+        val_losses = np.zeros(self.num_epochs)
         
         for epoch in range(self.num_epochs):
             train_loss = self.multi_step(train_encoder_x, train_decoder_x, 
@@ -329,8 +330,11 @@ class EncoderDecoder(object):
                               train_loss, val_loss))
                     
                 # apply early stop
-                if utils.early_stop(val_losses, self.patience):
+                # print(utils.early_stop(val_losses, self.patience))
+                if utils.early_stop(val_losses, idx=epoch, patience=self.patience):
                     print('Finished training config {} at epoch {}'.format('config_name', epoch))
+                    train_losses = train_losses[:epoch]
+                    val_losses = val_losses[:epoch]
                     break
             else:
                 if show_step is not 0 and epoch % show_step == 0:
