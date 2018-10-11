@@ -27,7 +27,7 @@
     "mlp": {
         "sliding_inference":[8, 10],
         "dropout_rate": [0.6, 0.8],
-        "batch_size":[32],
+        "batch_size":[16],
         "num_epochs":[100],
         "hidden_layers": [[8, 10], [4], [10]],
         "activation": ["sigmoid", "tanh"],
