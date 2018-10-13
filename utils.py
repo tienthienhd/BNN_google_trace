@@ -1,12 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Sep 16 19:24:16 2018
-
-@author: tienthien
-"""
-
-import re 
+import re
 import pandas as pd
 import numpy as np
 import json
@@ -37,33 +29,33 @@ def parse_string_to_array_list(string):
     results = []
     for s in string:
         i_start = s.index(']') + 1
-        objects = [s[1:i_start], s[i_start+1: s.index(']', i_start)+1]]
+        objects = [s[1:i_start], s[i_start + 1: s.index(']', i_start) + 1]]
         objects = parse_string_to_array_string(objects)
         results.append(objects)
     return results
 
-    
+
 def read_config(filename, chunksize=None, start_config=0, num_configs=None):
     if chunksize is not None:
-        for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config+1), nrows=num_configs):
+        for chunk in pd.read_csv(filename, chunksize=chunksize, skiprows=range(1, start_config + 1), nrows=num_configs):
             if 'layers_units' in chunk:
                 chunk[['layers_units']] = chunk[['layers_units']].apply(parse_string_to_array_int)
             if 'columns_full' in chunk:
                 chunk[['columns_full']] = chunk[['columns_full']].apply(parse_string_to_array_string)
             if 'features' in chunk:
-                chunk[['features']] = chunk[['features']].apply(parse_string_to_array_list)
+                chunk[['features']] = chunk[['features']].apply(parse_string_to_array_string)
             if 'hidden_layers' in chunk:
                 chunk[['hidden_layers']] = chunk[['hidden_layers']].apply(parse_string_to_array_int)
             yield chunk
     else:
         return pd.read_csv(filename)
-            
+
 
 def generate_config(json_file, file_to_save, list_field=None):
     json_configs = None
     with open(json_file, 'r') as f:
         json_configs = json.load(f)
-    
+
     configs_dict = dict()
     if list_field is None:
         for key, value in json_configs.items():
@@ -71,12 +63,12 @@ def generate_config(json_file, file_to_save, list_field=None):
     else:
         for key in list_field:
             configs_dict.update(json_configs[key])
-    
+
     configs = list(ParameterGrid(configs_dict))
     df = pd.DataFrame(configs, index=None)
     df = df.sample(frac=1).reset_index(drop=True)
     df.to_csv(file_to_save, index=True)
-    
+
 
 def plot_log(log_dict, metrics=None, file_save=None):
     for key, value in log_dict.items():
@@ -84,10 +76,12 @@ def plot_log(log_dict, metrics=None, file_save=None):
     if metrics:
         plt.xlabel(metrics[0])
         plt.ylabel(metrics[1])
-    
+
     plt.legend()
-    plt.savefig(file_save)
-#    plt.show()
+    if file_save is None:
+        plt.show()
+    else:
+        plt.savefig(file_save)
     plt.clf()
 
 
@@ -102,31 +96,31 @@ def padding(array, batch_size, pos=0, values=0):
     shape_pad_value = []
     padding_values = []
     for i in range(rank_pad_value):
-        shape_pad_value.append(array.shape[i+1])
-    
+        shape_pad_value.append(array.shape[i + 1])
+
     for i in range(padding_len):
         padding_values.append(np.full(shape_pad_value, values, dtype=np.float32))
-    
+
     result = np.array(padding_values)
     if pos == 0:  # pad on head
         result = np.concatenate((result, array))
     elif pos == 1:  # pad on tail
         result = np.concatenate((array, result))
-    
+
     return result
 
 
 def early_stop(array, idx, patience=0, min_delta=0.0):
-    if idx <= patience :
+    if idx <= patience:
         return False
-    
+
     value = array[idx - patience - 1]
-    arr = array[idx-patience:]
+    arr = array[idx - patience:]
     check = 0
     for val in arr:
-        if(val - value > min_delta):
+        if (val - value > min_delta):
             check += 1
-    if(check == patience):
+    if (check == patience):
         return True
     else:
         return False

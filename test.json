@@ -1,39 +1,35 @@
 {
-    "data": {
-        "data_directory": ["./data/"],
-        "data_name": ["data_resource_usage_5Minutes_6176858948"],
-        "features": [[["meanCPUUsage"], ["meanCPUUsage"]]]
-    },
-    
-    "encoder_decoder": {
-        "activation": ["tanh"],
-        "rnn_unit_type": ["lstm"],
-        "input_keep_prob": [1.0],
-        "output_keep_prob": [0.95],
-        "state_keep_prob": [0.95],
-        "variational_recurrent": [true],
-        
-        "batch_size":[32],
-        "sliding_encoder": [24],
-        "sliding_decoder": [4],
-        
-        "layers_units":[[16, 4]],
-        "num_epochs": [1000],
-        "optimizer":["rmsprop"],
-        "learning_rate": [0.001],
-        "patience": [20]
-    },
-    
-    "mlp": {
-        "sliding_inference":[8],
-        "dropout_rate": [0.95],
-        "batch_size":[32],
-        "num_epochs":[100],
-        "hidden_layers": [[16, 8, 4]],
-        "activation": ["tanh"],
-        "optimizer": ["adam"],
-        "learning_rate": [0.001],
-        "patience": [20]
-    }
+  "data":{
+    "name":["data_resource_usage_5Minutes_6176858948.csv"],
+    "features":[["canonical_memory_usage", "meanCPUUsage"]]
+  },
+  "encoder_decoder":{
+    "rnn_unit_type":["lstm"],
+    "activation":["tanh"],
+    "layers_units":[[4]],
 
+    "input_keep_prob":[0.95],
+    "output_keep_prob":[0.95],
+    "state_keep_prob":[0.95],
+    "variational_recurrent":[true],
+
+    "sliding_encoder":[18],
+    "sliding_decoder":[4],
+
+    "optimizer":["adam"],
+    "batch_size":[32],
+    "num_epochs":[100],
+    "patience":[20],
+    "learning_rate":[0.001]
+  },
+  "mlp":{
+    "hidden_layers":[[8]],
+    "activation":["tanh"],
+    "sliding_inference":[8],
+    "optimizer":["adam"],
+    "dropout_rate":[0.9],
+    "num_epochs":[100],
+    "learning_rate":[0.001],
+    "patience":[20]
+  }
 }

@@ -1,0 +1,49 @@
+,activation,batch_size,data_directory,data_name,dropout_rate,features,hidden_layers,learning_rate,num_epochs,optimizer,patience,sliding_inference
+0,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,10
+1,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,8
+2,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,10
+3,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,8
+4,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,10
+5,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,8
+6,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,8
+7,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,10
+8,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,10
+9,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,8
+10,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,10
+11,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,8
+12,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,10
+13,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,8
+14,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,8
+15,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,10
+16,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,10
+17,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,10
+18,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,8
+19,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,10
+20,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,10
+21,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,10
+22,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,10
+23,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,8
+24,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,8
+25,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,8
+26,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,8
+27,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,10
+28,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,10
+29,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,8
+30,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,8
+31,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,8
+32,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,8
+33,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,adam,10,8
+34,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,10
+35,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,10
+36,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,10
+37,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,8
+38,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,adam,10,10
+39,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,8
+40,sigmoid,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,10
+41,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,rmsprop,10,8
+42,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]","[8, 10]",0.005,100,rmsprop,10,8
+43,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,8
+44,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,10
+45,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[4],0.005,100,rmsprop,10,10
+46,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.8,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,10
+47,tanh,32,./data/,data_resource_usage_5Minutes_6176858948,0.6,"[['meanCPUUsage'], ['meanCPUUsage']]",[10],0.005,100,adam,10,8

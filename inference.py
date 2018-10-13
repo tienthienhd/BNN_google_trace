@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 17 19:11:32 2018
-
-@author: tienthien
-"""
-
 import tensorflow as tf
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,6 +5,98 @@ import numpy as np
 from data import Data
 import utils
 import math
+
+
+def load_model(sess, saved_model):
+    print('Load model:', saved_model)
+    saver = tf.train.import_meta_graph(saved_model + '.meta')
+    graph = tf.get_default_graph()
+
+    encoder_x = graph.get_tensor_by_name('encoder_x:0')
+    mlp_x = graph.get_tensor_by_name('x:0')
+    prediction = graph.get_tensor_by_name('prediction:0')
+
+    saver.restore(sess, saved_model)
+    #    writer = tf.summary.FileWriter('./log/', sess.graph)
+    return encoder_x, mlp_x, prediction
+
+
+def feed_forward(sess, model, inputs):
+    x_encoder = model[0]
+    x_mlp = model[1]
+    prediction = model[2]
+
+    x_e = inputs[0]
+    x_m = inputs[1]
+
+    batch_size = int(prediction.shape[0])
+
+    len_input = len(x_e)
+    x_e = utils.padding(x_e, batch_size)
+    x_m = utils.padding(x_m, batch_size)
+
+    num_batches = int(len(x_e) / batch_size)
+    if len(x_e) % batch_size != 0:
+        num_batches += 1
+    predictions = np.zeros((len(x_e)), np.float32)
+
+    for batch in range(num_batches):
+        x1 = x_e[batch * batch_size:
+              (batch + 1) * batch_size]
+        x2 = x_m[batch * batch_size:
+                 (batch + 1) * batch_size]
+
+        pred = sess.run(prediction, feed_dict={x_encoder: x1, x_mlp:x2})
+        pred = pred.reshape((batch_size))
+        predictions[batch * batch_size: (batch + 1) * batch_size] = pred
+    #        predictions.extend(pred)
+    #        num_batches += 1
+    return predictions[len(x_e) - len_input:]
+
+
+
+tf.reset_default_graph()
+sess = tf.Session()
+x_encoder, x_mlp, prediction = load_model(sess, 'log/results_mlp/9_model_mlp.ckpt')
+print(x_encoder.shape, x_mlp.shape, prediction.shape)
+
+configs_read = utils.read_config('log/results_mlp/configs_mlp.csv', 1000, 0)
+configs = [a for a in configs_read]
+configs = configs[0]
+config = configs.iloc[9]
+# print(config)
+
+data = Data(config)
+data.prepare_data_inputs_mlp(sliding_encoder=24, sliding_inference=config['sliding_inference'])
+# data.prepare_data_inputs_mlp(int(config['sliding_encoder']))
+val_set = data.get_data_mlp('val')
+test_set = data.get_data_mlp('test')
+
+x_e = val_set[0][0:32]
+x_m = val_set[1][0:32]
+y = val_set[2][0:32]
+print(x_e.shape, x_mlp.shape, y.shape)
+
+
+
+output_feed = prediction
+input_feed = {
+    x_encoder:x_e,
+    x_mlp:x_m,
+}
+
+pred = sess.run(output_feed, feed_dict=input_feed)
+
+
+predict = feed_forward(sess, (x_encoder, x_mlp, prediction), val_set)
+
+plt.plot(predict, label='prediction')
+plt.plot(val_set[2], label='actual')
+plt.legend()
+plt.show()
+# x_mlp = utils.padding(x_mlp, config['batch_size'])
+# x_encoder = utils.padding(x_encoder, config['batch_size'])
+
 
 def feed_forward(sess, encoder_x, prediction, X, batch_size):
     len_inputs = len(X)
@@ -52,18 +136,7 @@ def mcdropout(sess, encoder_x, prediction, x, batch_size, num_iterator=10):
     return y_mc, theta
     
 
-def load_model(sess, saved_model):
-    print('Load model:', saved_model)
-    saver = tf.train.import_meta_graph(saved_model+'.meta')
-    graph = tf.get_default_graph()
-    
-    encoder_x = graph.get_tensor_by_name('encoder_x:0')
-    
-    prediction = graph.get_tensor_by_name('prediction:0')
-    
-    saver.restore(sess, saved_model)
-#    writer = tf.summary.FileWriter('./log/', sess.graph)
-    return encoder_x, prediction
+
 
 def inherent_noise(sess, encoder_x, prediction, val_set, batch_size): # FIXME: tren tap test ra 0,
     X = val_set[0]
@@ -123,7 +196,7 @@ def test():
     tf.reset_default_graph()
     sess = tf.Session()
     # load model
-    encoder_x, prediction = load_model(sess, './log/models/' + config['model_type'] + '_mlp.ckpt')
+    encoder_x, prediction = load_model(sess, './log/results_mlp/9_model_mlp.ckpt')
     
     y_pred, theta = inference(sess, encoder_x, prediction, val_set, config, test_set[0])
     sess.close()
@@ -134,7 +207,7 @@ def test():
     plt.show()
     return y_pred, theta
 
-y_pred, theta = test()
+# y_pred, theta = test()
 #high = y_pred + theta
 #low = y_pred - theta
 #
