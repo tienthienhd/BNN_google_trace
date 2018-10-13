@@ -5,8 +5,8 @@ import pandas as pd
 import utils
 
 
-# import matplotlib
-# matplotlib.use('Agg')
+import matplotlib
+matplotlib.use('Agg')
 
 
 class MLP(object):

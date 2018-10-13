@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import utils
 
-# import matplotlib
-#
-# matplotlib.use('Agg')
+import matplotlib
+
+matplotlib.use('Agg')
 
 
 def rnn_cell(rnn_unit,
