@@ -9,16 +9,16 @@
     "layers_units":[[4]],
 
     "input_keep_prob":[0.95],
-    "output_keep_prob":[0.95],
+    "output_keep_prob":[0.5, 0.6, 0.7, 0.95],
     "state_keep_prob":[0.95],
     "variational_recurrent":[true],
 
     "sliding_encoder":[18],
-    "sliding_decoder":[4],
+    "sliding_decoder":[2],
 
     "optimizer":["adam"],
     "batch_size":[32],
-    "num_epochs":[100],
+    "num_epochs":[2],
     "patience":[20],
     "learning_rate":[0.001]
   },
@@ -28,7 +28,7 @@
     "sliding_inference":[8],
     "optimizer":["adam"],
     "dropout_rate":[0.9],
-    "num_epochs":[100],
+    "num_epochs":[10],
     "learning_rate":[0.001],
     "patience":[20]
   }

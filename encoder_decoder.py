@@ -366,7 +366,7 @@ class EncoderDecoder(object):
         self.saver.save(self.sess, model_file)
 
         with open(mae_rmse_log, 'a+') as f:
-            f.write('%f, %f\n' % (mae, rmse))
+            f.write('%s,%f,%f\n' % (log_name[log_name.rindex('/')+1:],mae, rmse))
 
     def predict(self, inputs):
         pass
