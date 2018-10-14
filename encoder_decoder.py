@@ -1,4 +1,5 @@
 import tensorflow as tf
+import math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -320,6 +321,9 @@ class EncoderDecoder(object):
             else:
                 if show_step is not 0 and epoch % show_step == 0:
                     print('Epoch #%d loss train = %.7f' % (epoch, train_loss))
+            if math.isnan(val_loss) or math.isnan(train_loss):
+                print('Early stop because loss is nan')
+                break
         return train_losses, val_losses
 
     def validate(self, test_set, dataset):

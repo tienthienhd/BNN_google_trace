@@ -42,7 +42,7 @@ def single_processing(results_dir, start_config):
 
     for configs in configs_ed:
         for idx, config in configs.iterrows():
-            run_config((results_dir, config, idx))
+            run_config((results_dir, config, idx+start_config))
 
 
 def multi_processing(results_dir, start_config):
@@ -53,7 +53,7 @@ def multi_processing(results_dir, start_config):
     list_configs = []
     for configs in configs_ed:
         for idx, config in configs.iterrows():
-            list_configs.append((results_dir, config, idx))
+            list_configs.append((results_dir, config, idx+start_config))
             if len(list_configs) >= 64:
                 pool.map(run_config, list_configs)
                 list_configs.clear()

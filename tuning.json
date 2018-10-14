@@ -18,7 +18,7 @@
 
     "optimizer":["adam", "rmsprop", "momemtum", "gradient"],
     "batch_size":[8, 16, 32],
-    "num_epochs":[1],
+    "num_epochs":[2000],
     "patience":[20],
     "learning_rate":[0.001, 0.005, 0.01]
   },
@@ -28,7 +28,7 @@
     "sliding_inference":[4, 8, 16],
     "optimizer":["adam", "rmsprop", "momemtum", "gradient"],
     "dropout_rate":[0.6, 0.7, 0.8, 0.9],
-    "num_epochs":[1],
+    "num_epochs":[2000],
     "learning_rate":[0.001, 0.005, 0.01],
     "patience":[20]
   }
