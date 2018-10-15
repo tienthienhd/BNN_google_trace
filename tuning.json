@@ -5,22 +5,22 @@
   },
   "encoder_decoder":{
     "rnn_unit_type":["lstm", "gru"],
-    "activation":["tanh", "sigmoid", "relu"],
-    "layers_units":[[4]],
+    "activation":["tanh", "sigmoid"],
+    "layers_units":[[16], [32], [8,4], [16,4], [32,4], [32,8]],
 
-    "input_keep_prob":[0.6, 0.8, 0.9, 0.95],
-    "output_keep_prob":[0.6, 0.8, 0.9, 0.95],
-    "state_keep_prob":[0.6, 0.8, 0.9, 0.95],
+    "input_keep_prob":[0.8, 0.95],
+    "output_keep_prob":[0.8, 0.95],
+    "state_keep_prob":[0.8, 0.95],
     "variational_recurrent":[true],
 
     "sliding_encoder":[18, 24, 30],
     "sliding_decoder":[2, 4, 6],
 
-    "optimizer":["adam", "rmsprop", "momemtum", "gradient"],
+    "optimizer":["adam", "rmsprop", "momemtum"],
     "batch_size":[8, 16, 32],
     "num_epochs":[2000],
     "patience":[20],
-    "learning_rate":[0.001, 0.005, 0.01]
+    "learning_rate":[0.001, 0.005]
   },
   "mlp":{
     "hidden_layers":[[4], [8], [16], [8, 4], [16, 4]],
