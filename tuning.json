@@ -4,7 +4,7 @@
     "features":[["meanCPUUsage"]]
   },
   "encoder_decoder":{
-    "rnn_unit_type":["lstm", "gru"],
+    "rnn_unit_type":["lstm"],
     "activation":["tanh", "sigmoid"],
     "layers_units":[[16], [32], [8,4], [16,4], [32,4], [32,8]],
 
@@ -16,8 +16,8 @@
     "sliding_encoder":[18, 24, 30],
     "sliding_decoder":[2, 4, 6],
 
-    "optimizer":["adam", "rmsprop", "momemtum"],
-    "batch_size":[8, 16, 32],
+    "optimizer":["adam", "rmsprop"],
+    "batch_size":[16, 32],
     "num_epochs":[2000],
     "patience":[20],
     "learning_rate":[0.001, 0.005]
@@ -26,7 +26,7 @@
     "hidden_layers":[[4], [8], [16], [8, 4], [16, 4]],
     "activation":["tanh", "sigmoid", "relu"],
     "sliding_inference":[4, 8, 16],
-    "optimizer":["adam", "rmsprop", "momemtum", "gradient"],
+    "optimizer":["adam", "rmsprop", "momemtum"],
     "dropout_rate":[0.6, 0.7, 0.8, 0.9],
     "num_epochs":[2000],
     "learning_rate":[0.001, 0.005, 0.01],

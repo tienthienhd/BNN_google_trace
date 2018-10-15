@@ -321,7 +321,7 @@ class EncoderDecoder(object):
             else:
                 if show_step is not 0 and epoch % show_step == 0:
                     print('Epoch #%d loss train = %.7f' % (epoch, train_loss))
-            if math.isnan(train_loss):
+            if math.isnan(train_loss) or train_loss > 1:
                 print('Early stop because loss is nan')
                 break
         return train_losses, val_losses
