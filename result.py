@@ -1,9 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-idx = range(9, 10)
+idx = range(0,2)
 for i in idx:
-    path = 'log/results_mlp/{}_predict.csv'.format(i)
+    path = 'results/mlp/{}_predict.csv'.format(i)
+    print(path)
 
     df = pd.read_csv(path)
     df.plot()

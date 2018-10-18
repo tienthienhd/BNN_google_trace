@@ -62,7 +62,15 @@ def rnn_cell(rnn_unit,
     return tf.nn.rnn_cell.MultiRNNCell(cells)
 
 
+
 def get_state_variables(rnn_unit_type, batch_size, cell):
+    '''
+    maybe not use
+    :param rnn_unit_type:
+    :param batch_size:
+    :param cell:
+    :return:
+    '''
     # For each layer, get the initial state and make a variable out of it
     # to enable updating its value.
     state_variables = []
@@ -79,6 +87,13 @@ def get_state_variables(rnn_unit_type, batch_size, cell):
 
 
 def get_state_update_op(rnn_unit_type, state_variables, new_states):
+    '''
+    maybe not use
+    :param rnn_unit_type:
+    :param state_variables:
+    :param new_states:
+    :return:
+    '''
     # Add an operation to update the train states with the last state tensors
     update_ops = []
     if rnn_unit_type == 'lstm':
@@ -151,18 +166,18 @@ class EncoderDecoder(object):
                                     variational_recurrent)
 
             # encoder state is variable but it is not trainable
-            encoder_state = get_state_variables(rnn_unit_type, batch_size,
-                                                encoder_cell)
+            # encoder_state = get_state_variables(rnn_unit_type, batch_size,
+            #                                     encoder_cell)
 
             # get output and state after feed inputs
-            encoder_outputs, new_state = tf.nn.dynamic_rnn(cell=encoder_cell,
+            encoder_outputs, encoder_state = tf.nn.dynamic_rnn(cell=encoder_cell,
                                                            inputs=self.encoder_x,
-                                                           initial_state=encoder_state,
+                                                           # initial_state=encoder_state,
                                                            dtype=tf.float32)
 
             # update variables encoder state
-            self.update_op = get_state_update_op(rnn_unit_type, encoder_state,
-                                                 new_state)
+            # self.update_op = get_state_update_op(rnn_unit_type, encoder_state,
+            #                                      new_state)
 
             # identity for encoder outputs to load indivial encoder_outputs
             encoder_outputs = tf.identity(encoder_outputs,
@@ -181,7 +196,8 @@ class EncoderDecoder(object):
             # get output and state after feed inputs
             decoder_outputs, decoder_state = tf.nn.dynamic_rnn(cell=decoder_cell,
                                                                inputs=self.decoder_x,
-                                                               initial_state=encoder_state)
+                                                               initial_state=encoder_state,
+                                                               dtype=tf.float32)
 
             # output dense layer
             pred_decoder = tf.layers.dense(inputs=decoder_outputs[:, -1, :],
@@ -217,7 +233,7 @@ class EncoderDecoder(object):
                           self.decoder_x: decoder_x,
                           self.decoder_y: decoder_y
                           }
-            output_feed = [self.update_op, self.loss, self.optimizer]
+            output_feed = [self.loss, self.optimizer] # position 0: self.update_op,
         elif mode == 1:
             input_feed = {
                 self.encoder_x: encoder_x,
@@ -233,12 +249,7 @@ class EncoderDecoder(object):
 
         outputs = self.sess.run(output_feed, input_feed)
 
-        if mode == 0:
-            return outputs[1]
-        elif mode == 1:
-            return outputs[0]
-        elif mode == 2:
-            return outputs[0]
+        return outputs[0]
 
     def multi_step(self, encoder_x, decoder_x, decoder_y=None, mode=2):
         '''
@@ -249,40 +260,26 @@ class EncoderDecoder(object):
         :param mode: 0: training; 1: validate; 2:predict
         :return:
         '''
-        len_x = len(encoder_x)
-        encoder_x = utils.padding(encoder_x, self.batch_size)
-        decoder_x = utils.padding(decoder_x, self.batch_size)
-        if mode != 2:
-            decoder_y = utils.padding(decoder_y, self.batch_size)
 
-        num_batches = int(len(encoder_x) / self.batch_size)
-        if len(encoder_x) % self.batch_size != 0:
-            num_batches += 1
-        if mode == 0 or mode == 1:
+        if mode == 0:
+            num_batches = int(len(encoder_x) / self.batch_size)
+            if len(encoder_x) % self.batch_size != 0:
+                num_batches += 1
             total_loss = 0.0
-        elif mode == 2:
-            prediction = np.empty((len(encoder_x), 1))
-
-        for batch in range(num_batches):
-            e_x = encoder_x[batch * self.batch_size:
-                            (batch + 1) * self.batch_size]
-            d_x = decoder_x[batch * self.batch_size:
-                            (batch + 1) * self.batch_size]
-            if mode == 0 or mode == 1:
+            for batch in range(num_batches):
+                e_x = encoder_x[batch * self.batch_size:
+                                (batch + 1) * self.batch_size]
+                d_x = decoder_x[batch * self.batch_size:
+                                (batch + 1) * self.batch_size]
                 d_y = decoder_y[batch * self.batch_size:
                                 (batch + 1) * self.batch_size]
-            elif mode == 2:
-                d_y = None
-            output = self.step(e_x, d_x, d_y, mode)
-            if mode == 0 or mode == 1:
-                total_loss += output
-            elif mode == 2:
-                prediction[batch * self.batch_size:
-                           (batch + 1) * self.batch_size] = output
-        if mode == 0 or mode == 1:
-            return total_loss / num_batches
+                a = self.step(e_x, d_x, d_y, mode=0)
+                total_loss += self.step(e_x, d_x, d_y, mode=0) * len(e_x)
+            return total_loss / len(encoder_x)
+        elif mode == 1:
+            return self.step(encoder_x, decoder_x, decoder_y, mode=1)
         elif mode == 2:
-            return prediction[len(encoder_x) - len_x:]
+            return self.step(encoder_x, decoder_x, None, mode=2)
 
     def train(self, train_set, val_set=None, num_epochs=100, patience=20, show_step=10):
         train_encoder_x = train_set[0]
@@ -323,6 +320,7 @@ class EncoderDecoder(object):
                     print('Epoch #%d loss train = %.7f' % (epoch, train_loss))
             if math.isnan(train_loss) or train_loss > 1:
                 print('Early stop because loss is nan')
+                print('Finished training config {} at epoch {}'.format('config_name', epoch))
                 break
         return train_losses, val_losses
 
@@ -335,6 +333,10 @@ class EncoderDecoder(object):
 
         prediction = dataset.denormalize(prediction)
         y_actual = dataset.denormalize(decoder_y)
+
+        # prediction = prediction[1:]  #FIXME: test
+        # y_actual = y_actual[:-1]
+
         mae = np.mean(np.abs(prediction - y_actual))
         rmse = np.sqrt(np.mean(np.square(prediction-y_actual)))
         print('mae: %.7f  rmse: %.7f' % (mae, rmse))
@@ -375,19 +377,20 @@ class EncoderDecoder(object):
         self.sess.close()
 
 #
-# import preprocessing_data
-# dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
-# train, val, test = dataset.get_data(4, 2)
-# ed = EncoderDecoder('lstm', 'tanh', [4], 0.95, 0.95, 0.95, True, 'adam', 32, 1, 0.001)
-# train_losses, val_losses = ed.train(train, val, 1, 10, 10)
-#
-# import matplotlib.pyplot as plt
-# # plt.plot(train_losses, label='train_loss')
-# # plt.plot(val_losses, label='val_loss')
-# # plt.legend()
-# # plt.show()
-#
-# prediction, y_actual, mae, rmse = ed.validate(test, dataset)
-# test_dict = {'predict': prediction, 'actual': y_actual}
-# utils.plot_log(test_dict)
-# # print(pred)
+import preprocessing_data
+dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
+train, val, test = dataset.get_data(12, 3)
+ed = EncoderDecoder('lstm', 'tanh', [32], 0.95, 0.95, 0.95, True, 'rmsprop', 16, 1, 0.001)
+# train_losses, val_losses = ed.train(train, val, 1000, 20, 10)
+
+ed.fit(dataset, 1000, 20, 30, 6, 'results/ed/0')
+import matplotlib.pyplot as plt
+# plt.plot(train_losses, label='train_loss')
+# plt.plot(val_losses, label='val_loss')
+# plt.legend()
+# plt.show()
+
+prediction, y_actual, mae, rmse = ed.validate(test, dataset)
+test_dict = {'predict': prediction, 'actual': y_actual}
+utils.plot_log(test_dict)
+# print(pred)
