@@ -342,7 +342,7 @@ class EncoderDecoder(object):
         print('mae: %.7f  rmse: %.7f' % (mae, rmse))
         return prediction, y_actual, mae, rmse
 
-    def fit(self, dataset, num_epochs, patience, encoder_sliding, decoder_sliding, log_name):
+    def fit(self, dataset, num_epochs, patience, encoder_sliding, decoder_sliding, log_name, save_model=True):
         history_img = log_name + '_history.png'
         predict_log = log_name + '_predict.csv'
         predict_log_img = log_name + '_predict.png'
@@ -365,7 +365,8 @@ class EncoderDecoder(object):
         df_test = pd.DataFrame(test_dict)
         df_test.to_csv(predict_log, index=False)
 
-        self.saver.save(self.sess, model_file)
+        if save_model:
+            self.saver.save(self.sess, model_file)
 
         with open(mae_rmse_log, 'a+') as f:
             f.write('%s,%f,%f\n' % (log_name[log_name.rindex('/')+1:],mae, rmse))
@@ -376,21 +377,21 @@ class EncoderDecoder(object):
     def close_sess(self):
         self.sess.close()
 
+# #
+# import preprocessing_data
+# dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
+# train, val, test = dataset.get_data(24, 6)
+# ed = EncoderDecoder('gru', 'tanh', [16], 0.95, 0.95, 0.8, True, 'rmsprop', 32, 1, 0.01)
+# # train_losses, val_losses = ed.train(train, val, 1000, 20, 10)
 #
-import preprocessing_data
-dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
-train, val, test = dataset.get_data(12, 3)
-ed = EncoderDecoder('lstm', 'tanh', [32], 0.95, 0.95, 0.95, True, 'rmsprop', 16, 1, 0.001)
-# train_losses, val_losses = ed.train(train, val, 1000, 20, 10)
-
-ed.fit(dataset, 1000, 20, 30, 6, 'results/ed/0')
-import matplotlib.pyplot as plt
-# plt.plot(train_losses, label='train_loss')
-# plt.plot(val_losses, label='val_loss')
-# plt.legend()
-# plt.show()
-
-prediction, y_actual, mae, rmse = ed.validate(test, dataset)
-test_dict = {'predict': prediction, 'actual': y_actual}
-utils.plot_log(test_dict)
-# print(pred)
+# ed.fit(dataset, 1000, 5, 24, 6, 'results/ed/1')
+# import matplotlib.pyplot as plt
+# # plt.plot(train_losses, label='train_loss')
+# # plt.plot(val_losses, label='val_loss')
+# # plt.legend()
+# # plt.show()
+#
+# prediction, y_actual, mae, rmse = ed.validate(test, dataset)
+# test_dict = {'predict': prediction, 'actual': y_actual}
+# utils.plot_log(test_dict)
+# # print(pred)
