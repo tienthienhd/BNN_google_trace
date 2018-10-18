@@ -60,16 +60,22 @@ class Data(object):
         # df.plot()
         # plt.show()
 
-        min_features = dict()
-        max_features = dict()
-        dict_normalized = dict()
-        for feature in use_features:
-            data = df.loc[:, feature]
-            min_features[feature] = np.amin(data)
-            max_features[feature] = np.amax(data)
-            dict_normalized[feature] = (data - min_features[feature]) / (max_features[feature] - min_features[feature])
+        min_features = np.amin(df)
+        max_features = np.amax(df)
 
-        df_normalized = pd.DataFrame(dict_normalized)
+        df_normalized = (df - min_features) / (max_features - min_features)
+        # print(type(df_normalized))
+
+        # min_features = dict()
+        # max_features = dict()
+        # dict_normalized = dict()
+        # for feature in use_features:
+        #     data = df.loc[:, feature]
+        #     min_features[feature] = np.amin(data)
+        #     max_features[feature] = np.amax(data)
+        #     dict_normalized[feature] = (data - min_features[feature]) / (max_features[feature] - min_features[feature])
+        #
+        # df_normalized = pd.DataFrame(dict_normalized)
 
         self.min_features = min_features
         self.max_features = max_features
@@ -99,12 +105,17 @@ class Data(object):
         train_e, val_e, test_e = split_data(input_encoder)
         train_d, val_d, test_d = split_data(input_decoder)
         train_o, val_o, test_o = split_data(output)
+        # print(train_e[0])
+        # print('=============')
+        # print(train_d[0])
+        # print('==============')
+        # print(train_o[0])
 
         return (train_e, train_d, train_o), (val_e, val_d, val_o), (test_e, test_d, test_o)
 
 
 
-# data = Data('data/data_resource_usage_5Minutes_6176858948.csv')
+data = Data('data/data_resource_usage_5Minutes_6176858948.csv', use_features=['meanCPUUsage', 'canonical_memory_usage'])
 # train, val, test = data.get_data(4, 3)
 # print(train[0][0], train[1][0], train[2][0])
 # print("==========================")

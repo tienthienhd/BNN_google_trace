@@ -11,9 +11,9 @@ matplotlib.use('Agg')
 
 
 class MLP(object):
-    def __init__(self, encoder_model, hidden_layers, activation, optimizer, dropout_rate, learning_rate, sliding):
+    def __init__(self, encoder_model, hidden_layers, activation, optimizer, dropout_rate, batch_size, learning_rate, sliding):
         tf.reset_default_graph()
-
+        self.batch_size = batch_size
         self.sess = tf.Session()
         self.load_encoder_model(encoder_model)
         self.build_model(hidden_layers=hidden_layers,
@@ -32,11 +32,12 @@ class MLP(object):
         encoder_outputs = encoder_graph.get_tensor_by_name('encoder/encoder_outputs:0')
         output_encoder_sg = tf.stop_gradient(encoder_outputs)
         self.encoder_last_outputs = output_encoder_sg[:, -1, :]
+        # print(self.encoder_last_outputs.shape)
         self.encoder_last_outputs = tf.reshape(self.encoder_last_outputs,
-                                               shape=(self.encoder_last_outputs.shape[0],
+                                               shape=(-1,
                                                       self.encoder_last_outputs.shape[1],
                                                       1))
-        self.batch_size = int(self.encoder_last_outputs.shape[0])
+        # self.batch_size = int(self.encoder_last_outputs.shape[0])
         self.sliding_encoder = int(self.encoder_last_outputs.shape[1])
         encoder_saver.restore(self.sess, saved_file)
 
@@ -45,11 +46,11 @@ class MLP(object):
                                 name='x')
         self.y = tf.placeholder(dtype=tf.float32, shape=[None, 1], name='y')
 
-        prev_layer = self.encoder_last_outputs
+        # prev_layer = self.encoder_last_outputs
         # print(prev_layer.shape)
-        prev_layer = tf.concat(values=[prev_layer, self.x], axis=1)
+        prev_layer = tf.concat(values=[self.encoder_last_outputs, self.x], axis=1)
         # print(prev_layer.shape)
-        prev_layer = tf.reshape(prev_layer, (int(prev_layer.shape[0]), int(prev_layer.shape[1] * prev_layer.shape[2])))
+        prev_layer = tf.reshape(prev_layer, (-1, int(prev_layer.shape[1] * prev_layer.shape[2])))
         for i, num_units in enumerate(hidden_layers):
             prev_layer = tf.layers.dense(inputs=prev_layer,
                                          activation=activation,
@@ -61,14 +62,7 @@ class MLP(object):
         self.pred = tf.layers.dense(inputs=prev_layer,
                                units=1,
                                name='output_layer')
-        # self.pred_inverse = pred * (self.max + self.min) + self.min
-        # self.pred_inverse = tf.identity(self.pred_inverse, name='prediction')
-        # self.y_inverse = self.y * (self.max + self.min) + self.min
-        #
-        # self.MAE = tf.reduce_mean(tf.abs(tf.subtract(self.pred_inverse,
-        #                                              self.y_inverse)))
-        # self.RMSE = tf.sqrt(tf.reduce_mean(tf.square(tf.subtract(
-        #     self.pred_inverse, self.y_inverse))))
+        self.pred = tf.identity(self.pred, 'prediction')
 
         # choose for optimize. if gpu is available then choose gpu for optimize
         device = '/CPU:0'
@@ -113,42 +107,24 @@ class MLP(object):
         return outputs[0]
 
     def multi_step(self, x_encoder, x_mlp, y, mode=2):
-        len_x = len(x_encoder)
-        x_encoder = utils.padding(x_encoder, self.batch_size)
-        x_mlp = utils.padding(x_mlp, self.batch_size)
-        if mode != 2:
-            y = utils.padding(y, self.batch_size)
-
-        num_batches = int(len(x_encoder) / int(self.batch_size))
-        if len(x_encoder) % self.batch_size != 0:
-            num_batches += 1
-        if mode == 0 or mode == 1:
+        if mode == 0:
+            num_batches = int(len(x_encoder) / int(self.batch_size))
+            if len(x_encoder) % self.batch_size != 0:
+                num_batches += 1
             total_loss = 0.0
-        elif mode == 2:
-            prediction = np.empty((len(x_encoder), 1))
-
-        for batch in range(num_batches):
-            x1 = x_encoder[batch * self.batch_size:
+            for batch in range(num_batches):
+                x1 = x_encoder[batch * self.batch_size:
+                               (batch + 1) * self.batch_size]
+                x2 = x_mlp[batch * self.batch_size:
                            (batch + 1) * self.batch_size]
-            x2 = x_mlp[batch * self.batch_size:
-                       (batch + 1) * self.batch_size]
-            if mode == 0 or mode == 1:
                 y_ = y[batch * self.batch_size:
-                      (batch + 1) * self.batch_size]
-            elif mode == 2:
-                y_ = None
-            output = self.step(x1, x2, y_, mode=mode)
-
-            if mode == 0 or mode == 1:
-                total_loss += output
-            elif mode == 2:
-                prediction[batch * self.batch_size:
-                           (batch+1) * self.batch_size] = output
-
-        if mode == 0 or mode == 1:
-            return total_loss / num_batches
+                       (batch + 1) * self.batch_size]
+                total_loss += self.step(x1, x2, y_, mode=0) * len(x1)
+            return total_loss / len(x_encoder)
+        elif mode == 1:
+            return self.step(x_encoder, x_mlp, y, mode=1)
         elif mode == 2:
-            return prediction[len(x_encoder) - len_x:]
+            return self.step(x_encoder, x_mlp, None, mode=2)
 
     def train(self, train_set, val_set=None, num_epochs=100, patience=20, show_step=10):
         train_x1 = train_set[0]
@@ -228,8 +204,10 @@ class MLP(object):
 
         self.saver.save(self.sess, model_file)
 
+        # with open(mae_rmse_log, 'a+') as f:
+        #     f.write('%f, %f\n' % (mae, rmse))
         with open(mae_rmse_log, 'a+') as f:
-            f.write('%f, %f\n' % (mae, rmse))
+            f.write('%s,%f,%f\n' % (log_name[log_name.rindex('/')+1:],mae, rmse))
 
     def predict(self, inputs):
         pass
@@ -238,7 +216,7 @@ class MLP(object):
         self.sess.close()
 
 
-# import preprocessing_data
-# dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
-# mlp = MLP('results/ed/0_model_ed.ckpt', [4], 'tanh', 'adam', 0.95, 0.001, 8)
-# mlp.fit(dataset, num_epochs=10, patience=20, sliding=8, log_name='results/mlp/0')
+import preprocessing_data
+dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
+mlp = MLP('results/ed/0_model_ed.ckpt', [32, 16], 'tanh', 'rmsprop', 0.95, 32, 0.001, 4)
+mlp.fit(dataset, num_epochs=1000, patience=20, sliding=4, log_name='results/mlp/1')
