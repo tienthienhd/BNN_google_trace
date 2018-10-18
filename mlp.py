@@ -174,7 +174,11 @@ class MLP(object):
 
         prediction = dataset.denormalize(prediction)
         y_actual = dataset.denormalize(y)
-        mae = np.mean(np.abs(np.square(prediction-y_actual)))
+
+        # prediction = prediction[1:]
+        # y_actual = y_actual[:-1]
+
+        mae = np.mean(np.abs(prediction-y_actual))
         rmse = np.sqrt(np.mean(np.square(prediction-y_actual)))
         print('mae: %.7f  rmse: %.7f' % (mae, rmse))
         return prediction, y_actual, mae, rmse
@@ -218,5 +222,8 @@ class MLP(object):
 
 import preprocessing_data
 dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
-mlp = MLP('results/ed/0_model_ed.ckpt', [32, 16], 'tanh', 'rmsprop', 0.95, 32, 0.001, 4)
-mlp.fit(dataset, num_epochs=1000, patience=20, sliding=4, log_name='results/mlp/1')
+mlp = MLP('results/ed/0_model_ed.ckpt', [32, 16, 4], 'tanh', 'rmsprop', 0.1, 16, 0.001, 4)
+mlp.fit(dataset, num_epochs=1000, patience=5, sliding=4, log_name='results/mlp/1')
+
+# train, val, test = dataset.get_data(30, 4)
+# mlp.validate(test, dataset)
