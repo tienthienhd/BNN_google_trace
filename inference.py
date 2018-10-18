@@ -2,7 +2,7 @@ import tensorflow as tf
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from data import Data
+from preprocessing_data import Data
 import utils
 import math
 
@@ -21,7 +21,7 @@ def load_model(sess, saved_model):
     return encoder_x, mlp_x, prediction
 
 
-def feed_forward(sess, model, inputs):
+def feed_forward(sess, model, inputs, dataset):
     x_encoder = model[0]
     x_mlp = model[1]
     prediction = model[2]
@@ -29,35 +29,42 @@ def feed_forward(sess, model, inputs):
     x_e = inputs[0]
     x_m = inputs[1]
 
-    batch_size = int(prediction.shape[0])
+    pred = sess.run(prediction, feed_dict={x_encoder:x_e, x_mlp:x_m})
+    pred_inv = dataset.denormalize(pred)
+    return pred_inv
 
-    len_input = len(x_e)
-    x_e = utils.padding(x_e, batch_size)
-    x_m = utils.padding(x_m, batch_size)
+def inherent_noise(sess, model, val_set, dataset):
+    pred = feed_forward(sess, model, val_set, dataset)
+    actual_inv = dataset.denormalize(val_set[2])
+    actual_inv = np.reshape(actual_inv, (-1, 1))
+    # sub = pred - actual_inv
+    # print(np.amax(sub), np.amin(sub))
+    return np.mean(np.square(pred - actual_inv))
 
-    num_batches = int(len(x_e) / batch_size)
-    if len(x_e) % batch_size != 0:
-        num_batches += 1
-    predictions = np.zeros((len(x_e)), np.float32)
+def mcdropout(sess, model, inputs, dataset, num_iterator=10):
+    preds = np.empty(shape=(num_iterator, len(inputs[0])))
+    for i in range(num_iterator):
+        pred = feed_forward(sess, model, inputs, dataset)
+        preds[i] = np.reshape(pred, len(pred))
+    y_mc = np.mean(preds, axis=0)
+    theta = [[np.square(y - p) for p in preds[:, 0]] for y in y_mc]
+    theta = np.array(theta)
+    theta = np.mean(theta, axis=1)
+    return y_mc, theta
 
-    for batch in range(num_batches):
-        x1 = x_e[batch * batch_size:
-              (batch + 1) * batch_size]
-        x2 = x_m[batch * batch_size:
-                 (batch + 1) * batch_size]
+def inference(sess, model, inputs, dataset, theta2_sq):
+    y_mc, theta1_sq = mcdropout(sess, model, inputs, dataset)
 
-        pred = sess.run(prediction, feed_dict={x_encoder: x1, x_mlp:x2})
-        pred = pred.reshape((batch_size))
-        predictions[batch * batch_size: (batch + 1) * batch_size] = pred
-    #        predictions.extend(pred)
-    #        num_batches += 1
-    return predictions[len(x_e) - len_input:]
+    theta = np.sqrt(theta1_sq + theta2_sq)
+    return y_mc, theta
+
+
 
 
 
 tf.reset_default_graph()
 sess = tf.Session()
-x_encoder, x_mlp, prediction = load_model(sess, 'log/results_mlp/9_model_mlp.ckpt')
+x_encoder, x_mlp, prediction = load_model(sess, 'results/mlp/1_model_mlp.ckpt')
 print(x_encoder.shape, x_mlp.shape, prediction.shape)
 
 configs_read = utils.read_config('log/results_mlp/configs_mlp.csv', 1000, 0)
@@ -66,120 +73,33 @@ configs = configs[0]
 config = configs.iloc[9]
 # print(config)
 
-data = Data(config)
-data.prepare_data_inputs_mlp(sliding_encoder=24, sliding_inference=config['sliding_inference'])
-# data.prepare_data_inputs_mlp(int(config['sliding_encoder']))
-val_set = data.get_data_mlp('val')
-test_set = data.get_data_mlp('test')
+dataset = Data('data/data_resource_usage_5Minutes_6176858948.csv')
+train, val, test = dataset.get_data(30, 4)
 
-x_e = val_set[0][0:32]
-x_m = val_set[1][0:32]
-y = val_set[2][0:32]
-print(x_e.shape, x_mlp.shape, y.shape)
+# predict = feed_forward(sess, (x_encoder, x_mlp, prediction), test, dataset)
 
+n22 = inherent_noise(sess, (x_encoder, x_mlp, prediction), (val[0][:10], val[1][:10], val[2][:10]), dataset)
+ymc, n12 = mcdropout(sess, (x_encoder, x_mlp, prediction), (test[0][:10], test[1][:10], test[2][:10]), dataset)
+print('theta 2 =', n22)
+print('theta 1 =', n12)
 
 
-output_feed = prediction
-input_feed = {
-    x_encoder:x_e,
-    x_mlp:x_m,
-}
+ymc, theta = inference(sess, (x_encoder, x_mlp, prediction), (test[0][:1000], test[1][:1000], test[2][:1000]), dataset, n22)
 
-pred = sess.run(output_feed, feed_dict=input_feed)
+# print('y =', ymc)
+# print('theta =', theta)
+# print(test[2][:10])
+a = dataset.denormalize(test[2][:1000])
 
-
-predict = feed_forward(sess, (x_encoder, x_mlp, prediction), val_set)
-
-plt.plot(predict, label='prediction')
-plt.plot(val_set[2], label='actual')
+plt.fill_between(range(len(a)), ymc+theta, ymc-theta, color='c')
+plt.plot(ymc, 'b--', label='prediction')
+# plt.plot(ymc+theta, 'g.')
+# plt.plot(ymc-theta, 'g.')
+plt.plot(a, 'r-', label='actual')
 plt.legend()
 plt.show()
-# x_mlp = utils.padding(x_mlp, config['batch_size'])
-# x_encoder = utils.padding(x_encoder, config['batch_size'])
 
 
-def feed_forward(sess, encoder_x, prediction, X, batch_size):
-    len_inputs = len(X)
-    X = utils.padding(X, batch_size)
-    
-    num_batches = int(len(X)/batch_size)
-    if len(X) % batch_size != 0:
-        num_batches += 1
-    predictions = np.zeros((len(X)), np.float32)
-    for batch in range(num_batches):
-        x = X[batch * batch_size : 
-            (batch+1) * batch_size]
-        pred = sess.run(prediction, feed_dict={encoder_x: x})
-        pred = pred.reshape((batch_size))
-        predictions[batch*batch_size: (batch + 1) * batch_size] = pred
-#        predictions.extend(pred)
-#        num_batches += 1
-    return predictions[len(X)-len_inputs:]
-    
-def mcdropout(sess, encoder_x, prediction, x, batch_size, num_iterator=10):
-#    y_preds = []
-    y_preds = np.zeros(shape=(num_iterator, len(x)))
-        
-    for i in range(num_iterator):
-        pred = feed_forward(sess, encoder_x, prediction, x, batch_size)
-        y_preds[i] = pred
-    
-#    y_preds = np.array(y_preds)
-    y_mc = np.mean(y_preds, axis=0)
-    
-    theta = [[np.square(y-p) for p in y_preds[:, 0]] for y in y_mc]
-    theta = np.array(theta)
-    theta = np.mean(theta, axis=1)
-    
-#    biases = [np.square(y_mc - y_pred) for y_pred in y_preds]
-#    theta = np.mean(biases)
-    return y_mc, theta
-    
-
-
-
-def inherent_noise(sess, encoder_x, prediction, val_set, batch_size): # FIXME: tren tap test ra 0,
-    X = val_set[0]
-    Y = val_set[1]
-    
-#    X = utils.padding(X, batch_size)
-#    Y = utils.padding(Y, batch_size)
-    Y = np.reshape(Y, (len(Y)))
-#    num_samples = len(Y)
-#    
-#    num_batches = int(len(X)/batch_size)
-#    if len(X) % batch_size != 0:
-#        num_batches += 1
-##    predictions = []
-#    predictions = np.zeros(shape=(len(X)))
-#    
-#    for batch in range(num_batches):
-#        x = X[batch * batch_size : 
-#            (batch+1) * batch_size]
-#        pred = sess.run(prediction, feed_dict={encoder_x: x})
-#        pred = pred.reshape((batch_size))
-#        predictions[batch*batch_size: (batch + 1) * batch_size] = pred
-#        
-#    predictions = predictions[len(X) - num_samples:]
-#    a = predictions - Y
-#    b = np.square(a)
-#    c = np.mean(b)
-    
-    predictions = feed_forward(sess, encoder_x, prediction, X, batch_size)
-#    a = predictions - Y
-    theta = np.mean(np.square(predictions - Y))
-    print('inherent_noise ^2:', theta)
-    return theta
-
-def inference(sess, encoder_x, prediction, val_set, config, X):
-    
-    # mc dropout
-    y_mc, theta_1 = mcdropout(sess, encoder_x, prediction, X, int(config['batch_size']), num_iterator=10)
-    # inherent noise
-    theta_2 = inherent_noise(sess, encoder_x, prediction, val_set, int(config['batch_size']))
-#    theta = theta_1 + theta_2
-    theta = np.sqrt(theta_1 + theta_2)
-    return y_mc, theta
 
 
 def test():
