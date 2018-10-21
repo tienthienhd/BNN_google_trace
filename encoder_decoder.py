@@ -377,19 +377,19 @@ class EncoderDecoder(object):
     def close_sess(self):
         self.sess.close()
 
-# #
+#
 # import preprocessing_data
 # dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
-# train, val, test = dataset.get_data(24, 6)
-# ed = EncoderDecoder('gru', 'tanh', [16], 0.95, 0.95, 0.8, True, 'rmsprop', 32, 1, 0.01)
+# train, val, test = dataset.get_data(30, 6)
+# ed = EncoderDecoder('lstm', 'tanh', [32], 0.95, 0.95, 0.95, True, 'rmsprop', 16, 1, 0.001)
 # # train_losses, val_losses = ed.train(train, val, 1000, 20, 10)
 #
-# ed.fit(dataset, 1000, 5, 24, 6, 'results/ed/1')
-# import matplotlib.pyplot as plt
-# # plt.plot(train_losses, label='train_loss')
-# # plt.plot(val_losses, label='val_loss')
-# # plt.legend()
-# # plt.show()
+# ed.fit(dataset, 1000, 20, 30, 6, 'results/ed/1')
+import matplotlib.pyplot as plt
+# plt.plot(train_losses, label='train_loss')
+# plt.plot(val_losses, label='val_loss')
+# plt.legend()
+# plt.show()
 #
 # prediction, y_actual, mae, rmse = ed.validate(test, dataset)
 # test_dict = {'predict': prediction, 'actual': y_actual}

@@ -23,13 +23,14 @@
     "learning_rate":[0.001]
   },
   "mlp":{
-    "hidden_layers":[[8]],
+    "hidden_layers":[[8], [16], [8, 4]],
     "activation":["tanh"],
     "sliding_inference":[8],
     "optimizer":["adam"],
     "dropout_rate":[0.05],
-    "num_epochs":[200],
+    "num_epochs":[2],
     "learning_rate":[0.001],
+    "batch_size":[32],
     "patience":[20]
   }
 }

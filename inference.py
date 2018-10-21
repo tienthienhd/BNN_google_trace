@@ -31,14 +31,14 @@ def feed_forward(sess, model, inputs, dataset):
 
     pred = sess.run(prediction, feed_dict={x_encoder:x_e, x_mlp:x_m})
     pred_inv = dataset.denormalize(pred)
+    # pred_inv = pred_inv[1:]
     return pred_inv
 
 def inherent_noise(sess, model, val_set, dataset):
     pred = feed_forward(sess, model, val_set, dataset)
     actual_inv = dataset.denormalize(val_set[2])
     actual_inv = np.reshape(actual_inv, (-1, 1))
-    # sub = pred - actual_inv
-    # print(np.amax(sub), np.amin(sub))
+    # actual_inv = actual_inv[:-1]
     return np.mean(np.square(pred - actual_inv))
 
 def mcdropout(sess, model, inputs, dataset, num_iterator=10):
@@ -58,7 +58,12 @@ def inference(sess, model, inputs, dataset, theta2_sq):
     theta = np.sqrt(theta1_sq + theta2_sq)
     return y_mc, theta
 
-
+def plot_inference(actual, predict, theta):
+    plt.fill_between(range(len(actual)), predict + theta, predict - theta, color='c')
+    plt.plot(predict, 'b--', label='prediction')
+    plt.plot(actual, 'r-', label='actual')
+    plt.legend()
+    plt.show()
 
 
 
@@ -86,54 +91,12 @@ print('theta 1 =', n12)
 
 ymc, theta = inference(sess, (x_encoder, x_mlp, prediction), (test[0][:1000], test[1][:1000], test[2][:1000]), dataset, n22)
 
+# ymc = ymc[1:]
+# theta = theta[1:]
 # print('y =', ymc)
 # print('theta =', theta)
 # print(test[2][:10])
 a = dataset.denormalize(test[2][:1000])
+# a = a[:-1]
 
-plt.fill_between(range(len(a)), ymc+theta, ymc-theta, color='c')
-plt.plot(ymc, 'b--', label='prediction')
-# plt.plot(ymc+theta, 'g.')
-# plt.plot(ymc-theta, 'g.')
-plt.plot(a, 'r-', label='actual')
-plt.legend()
-plt.show()
-
-
-
-
-def test():
-    configs_read = utils.read_config('./log/models/configs_model_ed.csv', 1000, 0)
-    configs = [a for a in configs_read]
-    configs = configs[0]
-    config = configs.iloc[2]
-    
-    data = Data(config)
-    data.prepare_data_inputs_mlp(int(config['sliding_encoder']))
-    val_set = data.get_data_mlp('val')
-    test_set = data.get_data_mlp('test')
-    
-    tf.reset_default_graph()
-    sess = tf.Session()
-    # load model
-    encoder_x, prediction = load_model(sess, './log/results_mlp/9_model_mlp.ckpt')
-    
-    y_pred, theta = inference(sess, encoder_x, prediction, val_set, config, test_set[0])
-    sess.close()
-    
-    plt.plot(y_pred, label='predictions')
-    plt.plot(test_set[1], label='actual')
-    plt.legend()
-    plt.show()
-    return y_pred, theta
-
-# y_pred, theta = test()
-#high = y_pred + theta
-#low = y_pred - theta
-#
-#
-#plt.plot(y_pred)
-#plt.plot(high)
-#plt.plot(low)
-#
-#plt.show()
+plot_inference(a,ymc, theta)

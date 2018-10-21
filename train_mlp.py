@@ -19,7 +19,8 @@ def run_config(config_):
                 optimizer=config['optimizer'],
                 dropout_rate=config['dropout_rate'],
                 learning_rate=config['learning_rate'],
-                sliding=config['sliding_inference'])
+                sliding=config['sliding_inference'],
+                batch_size=config['batch_size'])
 
     model.fit(dataset=dataset,
               num_epochs=config['num_epochs'],
