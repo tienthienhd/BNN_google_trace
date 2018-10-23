@@ -1,0 +1,433 @@
+,activation,batch_size,dropout_rate,features,hidden_layers,learning_rate,name,num_epochs,optimizer,patience,sliding_inference
+0,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+1,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+2,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+3,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+4,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+5,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+6,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+7,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+8,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+9,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+10,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+11,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+12,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+13,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+14,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+15,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+16,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+17,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+18,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+19,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+20,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+21,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+22,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+23,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+24,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+25,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+26,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+27,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+28,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+29,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+30,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+31,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+32,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+33,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+34,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+35,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+36,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+37,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+38,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+39,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+40,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+41,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+42,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+43,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+44,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+45,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+46,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+47,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+48,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+49,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+50,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+51,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+52,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+53,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+54,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+55,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+56,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+57,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+58,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+59,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+60,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+61,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+62,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+63,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+64,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+65,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+66,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+67,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+68,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+69,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+70,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+71,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+72,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+73,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+74,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+75,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+76,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+77,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+78,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+79,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+80,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+81,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+82,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+83,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+84,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+85,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+86,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+87,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+88,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+89,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+90,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+91,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+92,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+93,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+94,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+95,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+96,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+97,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+98,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+99,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+100,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+101,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+102,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+103,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+104,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+105,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+106,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+107,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+108,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+109,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+110,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+111,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+112,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+113,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+114,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+115,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+116,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+117,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+118,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+119,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+120,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+121,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+122,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+123,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+124,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+125,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+126,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+127,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+128,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+129,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+130,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+131,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+132,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+133,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+134,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+135,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+136,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+137,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+138,sigmoid,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+139,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+140,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+141,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+142,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+143,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+144,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+145,sigmoid,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+146,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+147,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+148,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+149,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+150,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+151,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+152,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+153,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+154,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+155,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+156,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+157,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+158,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+159,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+160,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+161,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+162,sigmoid,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+163,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+164,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+165,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+166,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+167,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+168,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+169,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+170,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+171,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+172,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+173,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+174,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+175,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+176,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+177,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+178,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+179,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+180,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+181,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+182,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+183,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+184,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+185,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+186,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+187,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+188,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+189,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+190,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+191,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+192,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+193,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+194,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+195,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+196,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+197,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+198,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+199,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+200,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+201,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+202,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+203,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+204,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+205,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+206,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+207,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+208,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+209,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+210,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+211,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+212,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+213,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+214,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+215,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+216,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+217,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+218,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+219,tanh,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+220,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+221,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+222,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+223,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+224,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+225,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+226,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+227,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+228,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+229,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+230,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+231,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+232,tanh,16,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+233,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+234,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+235,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+236,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+237,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+238,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+239,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+240,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+241,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+242,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+243,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+244,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+245,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+246,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+247,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+248,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+249,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+250,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+251,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+252,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+253,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+254,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+255,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+256,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+257,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+258,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+259,tanh,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+260,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+261,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+262,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+263,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+264,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+265,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+266,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+267,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+268,tanh,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+269,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+270,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+271,tanh,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+272,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+273,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+274,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+275,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+276,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+277,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+278,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+279,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+280,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+281,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+282,tanh,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+283,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+284,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+285,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+286,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+287,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+288,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+289,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+290,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+291,sigmoid,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+292,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+293,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+294,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+295,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+296,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+297,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+298,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+299,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+300,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+301,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+302,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+303,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+304,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+305,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+306,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+307,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+308,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+309,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+310,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+311,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+312,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+313,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+314,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+315,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+316,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+317,tanh,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+318,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+319,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+320,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+321,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+322,tanh,16,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+323,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+324,sigmoid,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+325,sigmoid,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+326,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+327,tanh,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+328,tanh,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+329,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+330,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+331,tanh,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+332,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+333,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+334,sigmoid,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+335,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+336,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+337,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+338,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+339,sigmoid,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+340,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+341,sigmoid,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+342,tanh,16,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+343,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+344,tanh,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+345,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+346,tanh,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+347,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+348,sigmoid,16,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+349,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+350,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+351,sigmoid,32,0.1,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+352,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+353,sigmoid,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+354,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+355,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+356,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+357,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+358,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+359,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+360,sigmoid,32,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+361,tanh,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+362,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+363,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+364,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+365,tanh,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+366,sigmoid,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+367,tanh,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+368,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+369,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+370,sigmoid,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+371,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+372,tanh,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+373,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+374,sigmoid,16,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+375,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+376,sigmoid,16,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+377,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+378,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+379,sigmoid,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+380,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+381,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+382,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+383,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+384,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+385,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+386,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+387,tanh,32,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+388,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+389,tanh,32,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+390,tanh,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+391,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+392,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+393,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+394,sigmoid,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+395,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+396,sigmoid,32,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+397,tanh,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+398,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+399,tanh,32,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+400,sigmoid,32,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+401,tanh,16,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+402,tanh,16,0.5,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+403,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+404,tanh,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+405,sigmoid,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+406,sigmoid,16,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+407,sigmoid,32,0.3,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+408,sigmoid,32,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+409,tanh,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+410,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+411,tanh,16,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+412,sigmoid,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+413,sigmoid,16,0.3,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+414,sigmoid,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+415,tanh,16,0.1,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+416,tanh,32,0.1,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+417,tanh,32,0.3,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+418,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+419,sigmoid,16,0.1,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+420,tanh,32,0.3,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+421,sigmoid,32,0.5,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+422,tanh,16,0.3,['meanCPUUsage'],[8],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+423,tanh,16,0.1,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+424,sigmoid,32,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,16
+425,sigmoid,32,0.5,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,4
+426,sigmoid,16,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,16
+427,sigmoid,32,0.5,['meanCPUUsage'],[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,4
+428,tanh,16,0.3,['meanCPUUsage'],"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,15,8
+429,sigmoid,32,0.1,['meanCPUUsage'],"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+430,tanh,16,0.5,['meanCPUUsage'],"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
+431,sigmoid,32,0.5,['meanCPUUsage'],"[32, 16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,adam,15,8
