@@ -37,7 +37,7 @@ def single_processing(results_dir, start_config, encoder_model):
 
     for configs in configs_ed:
         for idx, config in configs.iterrows():
-            run_config((results_dir, config, idx, encoder_model))
+            run_config((results_dir, config, idx+start_config, encoder_model))
 
 
 def multi_processing(results_dir, start_config, encoder_model):
@@ -48,7 +48,7 @@ def multi_processing(results_dir, start_config, encoder_model):
     list_configs = []
     for configs in configs_mlp:
         for idx, config in configs.iterrows():
-            list_configs.append((results_dir, config, idx, encoder_model))
+            list_configs.append((results_dir, config, idx+start_config, encoder_model))
             if len(list_configs) >= 64:
                 pool.map(run_config, list_configs)
                 list_configs.clear()
