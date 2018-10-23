@@ -1,0 +1,193 @@
+,activation,batch_size,features,input_keep_prob,layers_units,learning_rate,name,num_epochs,optimizer,output_keep_prob,patience,rnn_unit_type,sliding_decoder,sliding_encoder,state_keep_prob,variational_recurrent
+0,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+1,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+2,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+3,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+4,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+5,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+6,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+7,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+8,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+9,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+10,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+11,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+12,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+13,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+14,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+15,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+16,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+17,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+18,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+19,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+20,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+21,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+22,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+23,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+24,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+25,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+26,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+27,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+28,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+29,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+30,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+31,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+32,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+33,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+34,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+35,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+36,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+37,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+38,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+39,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+40,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+41,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+42,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+43,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+44,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+45,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+46,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+47,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+48,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+49,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+50,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+51,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+52,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+53,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+54,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+55,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+56,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+57,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+58,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+59,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+60,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+61,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+62,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+63,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+64,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+65,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+66,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+67,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+68,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+69,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+70,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+71,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+72,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+73,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+74,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+75,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+76,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+77,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+78,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+79,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+80,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+81,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+82,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+83,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+84,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+85,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+86,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+87,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+88,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+89,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+90,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+91,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+92,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+93,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+94,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+95,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+96,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+97,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+98,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+99,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+100,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+101,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+102,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+103,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+104,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+105,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+106,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+107,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+108,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+109,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+110,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+111,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+112,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+113,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+114,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+115,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+116,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+117,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+118,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+119,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+120,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+121,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+122,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+123,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+124,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+125,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+126,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+127,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+128,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+129,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+130,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+131,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+132,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+133,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+134,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+135,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+136,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+137,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+138,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+139,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+140,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+141,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+142,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+143,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+144,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+145,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+146,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+147,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+148,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+149,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+150,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,30,0.95,True
+151,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+152,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+153,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,30,0.95,True
+154,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+155,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+156,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+157,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+158,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+159,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+160,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,30,0.95,True
+161,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,24,0.95,True
+162,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+163,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+164,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+165,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,12,0.95,True
+166,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+167,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,24,0.95,True
+168,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+169,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+170,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+171,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+172,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+173,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+174,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+175,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,18,0.95,True
+176,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+177,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,30,0.95,True
+178,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+179,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,18,0.95,True
+180,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+181,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+182,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+183,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[16, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,12,0.95,True
+184,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,12,0.95,True
+185,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 8]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,4,12,0.95,True
+186,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[32],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+187,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,24,0.95,True
+188,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,lstm,6,18,0.95,True
+189,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[32, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
+190,tanh,32,"['meanCPUUsage', 'canonical_memory_usage']",0.95,"[8, 4]",0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,6,18,0.95,True
+191,tanh,16,"['meanCPUUsage', 'canonical_memory_usage']",0.95,[16],0.001,data_resource_usage_5Minutes_6176858948.csv,2000,rmsprop,0.95,15,gru,4,24,0.95,True
