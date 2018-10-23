@@ -58,6 +58,7 @@ def rnn_cell(rnn_unit,
                                              variational_recurrent=variational_recurrent,
                                              input_size=input_size,
                                              dtype=tf.float32)
+        input_size = num_units
         cells.append(cell)
     return tf.nn.rnn_cell.MultiRNNCell(cells)
 
@@ -379,12 +380,12 @@ class EncoderDecoder(object):
 
 #
 # import preprocessing_data
-# dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv')
+# dataset = preprocessing_data.Data('data/data_resource_usage_5Minutes_6176858948.csv', use_features=["meanCPUUsage", "canonical_memory_usage"])
 # train, val, test = dataset.get_data(30, 6)
-# ed = EncoderDecoder('lstm', 'tanh', [32], 0.95, 0.95, 0.95, True, 'rmsprop', 16, 1, 0.001)
+# ed = EncoderDecoder('gru', 'tanh', [32, 8], 0.95, 0.95, 0.95, True, 'rmsprop', 32, 2, 0.001)
 # # train_losses, val_losses = ed.train(train, val, 1000, 20, 10)
 #
-# ed.fit(dataset, 1000, 20, 30, 6, 'results/ed/1')
+# ed.fit(dataset, 2, 20, 12, 6, 'results/ed/1')
 import matplotlib.pyplot as plt
 # plt.plot(train_losses, label='train_loss')
 # plt.plot(val_losses, label='val_loss')

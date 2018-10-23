@@ -1,22 +1,22 @@
 {
   "data":{
     "name":["data_resource_usage_5Minutes_6176858948.csv"],
-    "features":[["meanCPUUsage"]]
+    "features":[["meanCPUUsage","canonical_memory_usage"]]
   },
   "encoder_decoder":{
-    "rnn_unit_type":["lstm"],
+    "rnn_unit_type":["gru"],
     "activation":["tanh"],
-    "layers_units":[[32], [4], [8]],
+    "layers_units":[[32, 8]],
 
     "input_keep_prob":[0.95],
     "output_keep_prob":[0.95],
     "state_keep_prob":[0.95],
     "variational_recurrent":[true],
 
-    "sliding_encoder":[18],
-    "sliding_decoder":[4],
+    "sliding_encoder":[30],
+    "sliding_decoder":[6],
 
-    "optimizer":["adam"],
+    "optimizer":["rmsprop"],
     "batch_size":[32],
     "num_epochs":[2],
     "patience":[20],
