@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 # plt.show()
 # # plt.clf()
 
-path_result_mae = 'results/ed_21_10/mae_rmse_log.csv'
+path_result_mae = 'results/ed_mul_24_10/mae_rmse_log.csv'
 
 df_mae = pd.read_csv(path_result_mae, header=None, names=['index', 'mae', 'rmse'], index_col=0)
 df_mae = df_mae.sort_values('rmse')

@@ -35,8 +35,7 @@ class MLP(object):
         # print(self.encoder_last_outputs.shape)
         self.encoder_last_outputs = tf.reshape(self.encoder_last_outputs,
                                                shape=(-1,
-                                                      self.encoder_last_outputs.shape[1],
-                                                      1))
+                                                      self.encoder_last_outputs.shape[1]))
         # self.batch_size = int(self.encoder_last_outputs.shape[0])
         self.sliding_encoder = int(self.encoder_last_outputs.shape[1])
         encoder_saver.restore(self.sess, saved_file)
@@ -48,6 +47,7 @@ class MLP(object):
 
         # prev_layer = self.encoder_last_outputs
         # print(prev_layer.shape)
+        self.x = tf.reshape(self.x, (-1, int(self.x.shape[1] * self.x.shape[2])))
         prev_layer = tf.concat(values=[self.encoder_last_outputs, self.x], axis=1)
         # print(prev_layer.shape)
         prev_layer = tf.reshape(prev_layer, (-1, int(prev_layer.shape[1] * prev_layer.shape[2])))
