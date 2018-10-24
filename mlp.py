@@ -44,13 +44,13 @@ class MLP(object):
         self.x = tf.placeholder(dtype=tf.float32, shape=[None, sliding, self.encoder_x.shape[2]],
                                 name='x')
         self.y = tf.placeholder(dtype=tf.float32, shape=[None, 1], name='y')
-
+        x = self.x
         # prev_layer = self.encoder_last_outputs
         # print(prev_layer.shape)
-        self.x = tf.reshape(self.x, (-1, int(self.x.shape[1] * self.x.shape[2])))
-        prev_layer = tf.concat(values=[self.encoder_last_outputs, self.x], axis=1)
+        x = tf.reshape(x, (-1, int(x.shape[1] * x.shape[2])))
+        prev_layer = tf.concat(values=[self.encoder_last_outputs, x], axis=1)
         # print(prev_layer.shape)
-        prev_layer = tf.reshape(prev_layer, (-1, int(prev_layer.shape[1] * prev_layer.shape[2])))
+        # prev_layer = tf.reshape(prev_layer, (-1, int(prev_layer.shape[1] * prev_layer.shape[2])))
         for i, num_units in enumerate(hidden_layers):
             prev_layer = tf.layers.dense(inputs=prev_layer,
                                          activation=activation,
